@@ -1,0 +1,33 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 26 nov. 2017, 11:40:24
+    Author     : valibert
+*/
+
+@import "lib/bootstrap.scss"; 
+@import "pages/compte.scss"; 
+@import "pages/projets.scss"; 
+@import "pages/modification-projets.scss"; 
+/*message d'erreur*/
+.message-error{
+    color: red;
+}
+/* fin message */
+#login-accueil{
+    padding: 40px 0;
+}
+.borderRadius{
+    border : 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+}
+footer{
+    padding-top: 20px;
+    padding-bottom: 10px;
+    color: white;
+    background-color: black;
+}

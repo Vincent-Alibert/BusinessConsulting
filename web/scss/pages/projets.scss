@@ -1,0 +1,15 @@
+#projet{
+    padding: 20px 0;
+    ul {        
+        list-style:none;
+        a{
+            color : black;
+            &:hover{
+                text-decoration: none;
+            }
+        }
+        .card{
+            padding: 10px;
+        }
+    }
+}

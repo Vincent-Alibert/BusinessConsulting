@@ -1,0 +1,47 @@
+/*
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
+package facade;
+
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import model.Projets;
+import model.Utilisateurs;
+
+/**
+ *
+ * @author valibert
+ */
+@Stateless
+public class ProjetsFacade extends AbstractFacade<Projets> {
+    
+    @PersistenceContext(unitName = "BusinessConsultingPU")
+    private EntityManager em;
+    
+    @Override
+    protected EntityManager getEntityManager() {
+        return em;
+    }
+    
+    public ProjetsFacade() {
+        super(Projets.class);
+    }
+    
+    public Projets findByIdAndUser(int idProjet, Utilisateurs chefProj){
+        Projets projet;        
+        try {
+            Query query = em.createNamedQuery("Projets.findByIdAndCProjet", Projets.class);
+            query.setHint("javax.persistence.cache.storeMode", "REFRESH");
+            query.setParameter("idProjet", idProjet);
+            query.setParameter("idChefProj", chefProj);
+            projet = (Projets)query.getSingleResult();
+        } catch (Exception e) {
+            projet = new Projets();
+        }
+        return projet;
+    }
+}

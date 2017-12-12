@@ -1,0 +1,31 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 1 déc. 2017, 16:17:10
+    Author     : valibert
+*/
+
+#projet-modification{
+    padding: 20px 0;
+    .radio-choise{
+        tr{
+            margin-left:10px;
+            display: table;
+            td:first-of-type{
+                display: none;
+            }
+            td{
+                input{
+                    margin-right: 10px;
+                }
+                label{
+                    margin-right: 10px;
+                }
+            }
+        }
+        
+    }
+}

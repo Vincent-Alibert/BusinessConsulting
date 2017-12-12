@@ -1,0 +1,55 @@
+<ui:composition template="/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="content-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12" id="login-accueil">
+                    <h1>Page de connexion</h1>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <h:form id="formConnection">
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                        <h:inputText class="form-control" id="mailUtil" value="#{utilisateursManageur.mailUtil}" a:placeholder="Email">
+                            <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                        </h:inputText>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm-10">
+                        <h:inputSecret class="form-control" id="mdpUtil" value="#{utilisateursManageur.mdpUtil}" a:placeholder="Password" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="offset-sm-2 col-sm-10">
+                        <h:commandButton value="Valider" type="submit" class="btn btn-primary" action="#{utilisateursManageur.login()}" /> 
+                    </div>
+                </div>
+            </h:form>
+            <div class="message">
+                <h:message for="formConnection" showSummary="true" showDetail="false"/>
+            </div>
+            
+            <ui:repeat value="#{utilisateursManageur.listUser}" var="itemUser">
+                <div>
+                    <p>-----------------------------</p>
+                    <p>Mail : #{itemUser.mailUtil} </p>
+                    <p>MDP : #{itemUser.mdpUtil}</p>
+                    <ui:repeat value="#{itemUser.postesCollection}" var="itemPoste">
+                        <p>Poste : #{itemPoste.libelle} </p>
+                    </ui:repeat> 
+                    
+                </div>
+            </ui:repeat> 
+        </div>
+    </ui:define>
+</ui:composition>
