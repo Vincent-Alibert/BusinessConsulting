@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<html lang="fr" xmlns="http://www.w3.org/1999/xhtml"
+<!DOCTYPE html>
+<html lang="fr" 
+      xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
@@ -16,24 +18,8 @@
     
     <h:body>
         <f:view>
-            <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
-                
-                <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/BusinessConsulting/faces/index.xhtml">Accueil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/BusinessConsulting/faces/login.xhtml">Login</a>
-                        </li>
-                    </ul>
-                    <!--<form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                    </form>-->
-                </div>
-            </nav>
             
+            <ui:include src="nav.xhtml"></ui:include>
             <ui:insert name="content-main"></ui:insert>
                 
             <footer>

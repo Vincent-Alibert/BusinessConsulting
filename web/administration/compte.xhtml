@@ -1,32 +1,38 @@
-<ui:composition template="/template.xhtml"
+<ui:composition template="/WEB-INF/template.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:define name="content-main">
-        <h2>Bonjour #{utilisateursManageur.currentUser.prenomUtil}</h2>
-        <p>Vous chapotez #{utilisateursManageur.currentUser.projetsCollection.size()} projet(s)</p>
+        <section class="compte-accueil">
+            <div class="container">
+                <div class="row">
+                    <h2 class="col-12">Bonjour #{utilisateursManageur.currentUser.prenomUtil}</h2>
+                    <p class="col-12">Vous chapotez #{utilisateursManageur.currentUser.projetsCollection.size()} projet(s)</p>
+                </div>
+            </div>
+        </section>
         <section class="compte-project">
             <div class="container">
                 <ul class="row">
                     <ui:repeat value="#{utilisateursManageur.currentUser.projetsCollection}" var="itemProject" >
                         <li class="col-6 col-md-4">
                             <div class="card">
-                            <a href="projets/projets.xhtml?id=#{itemProject.idProjet}">
-                                <div class="card-block">
-                                    <h2 class="card-title">#{itemProject.libelleProj}</h2>
-                                    <p class="card-text">Projet débuté le : <h:outputText value="#{itemProject.dateDebutProj}">
-                                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                                        </h:outputText></p>
-                                    <p class="card-text">Phases de ce projet : </p>
-                                    <ul class="list-group list-group-flush " >
-                                        <ui:repeat value="#{itemProject.phasesCollection}" var="itemPhase" >
-                                            <li class="list-group-item">#{itemPhase.libellePhase}</li>
-                                        </ui:repeat>   
-                                    </ul>
-                                </div>
-                            </a>
+                                <a href="projets/projets.xhtml?id=#{itemProject.idProjet}">
+                                    <div class="card-block">
+                                        <h2 class="card-title">#{itemProject.libelleProj}</h2>
+                                        <p class="card-text">Projet débuté le : <h:outputText value="#{itemProject.dateDebutProj}">
+                                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                            </h:outputText></p>
+                                        <p class="card-text">Phases de ce projet : </p>
+                                        <ul class="list-group list-group-flush " >
+                                            <ui:repeat value="#{itemProject.phasesCollection}" var="itemPhase" >
+                                                <li class="list-group-item">#{itemPhase.libellePhase}</li>
+                                            </ui:repeat>   
+                                        </ul>
+                                    </div>
+                                </a>
                             </div>
                         </li>
                     </ui:repeat>

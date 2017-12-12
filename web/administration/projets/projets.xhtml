@@ -1,4 +1,4 @@
-<ui:composition template="/template.xhtml"
+<ui:composition template="/WEB-INF/template.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -8,12 +8,7 @@
         <f:viewParam id="id" name="id" value="#{projetsManageur.idProjetRequest}" required="false" />
         <f:viewAction onPostback="true" action="#{projetsManageur.load(utilisateursManageur.currentUser)}" />
     </f:metadata>
-    <ui:define name="content-main">
-    <p>TEST SESSION nom #{sessionScope.currentUserNom}</p>
-    <p>TEST SESSION id #{sessionScope.currentUserId}</p>
-    
-    
-   
+    <ui:define name="content-main">  
         <section id="projet">
             <div class="container">
                 

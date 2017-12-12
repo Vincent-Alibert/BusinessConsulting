@@ -30,50 +30,50 @@ public class UtilisateursManageur implements Serializable {
     private ArrayList<Utilisateurs> listUser;
     
     @EJB
-    UtilisateursFacade utilisateursFacade;
-
+            UtilisateursFacade utilisateursFacade;
+    
     /**
      * Creates a new instance of UtilisateursManageur
      */
     public UtilisateursManageur() {
     }
-
+    
     public String getMailUtil() {
         return mailUtil;
     }
-
+    
     public void setMailUtil(String mailUtil) {
         this.mailUtil = mailUtil;
     }
-
+    
     public String getMdpUtil() {
         return mdpUtil;
     }
-
+    
     public void setMdpUtil(String mdpUtil) {
         this.mdpUtil = mdpUtil;
     }
-
+    
     public Utilisateurs getCurrentUser() {
         return currentUser;
     }
-
+    
     public void setCurrentUser(Utilisateurs currentUser) {
         this.currentUser = currentUser;
     }
-
+    
     public UtilisateursFacade getUtilisateursFacade() {
         return utilisateursFacade;
     }
-
+    
     public void setUtilisateursFacade(UtilisateursFacade utilisateursFacade) {
         this.utilisateursFacade = utilisateursFacade;
     }
-
+    
     public ArrayList<Utilisateurs> getListUser() {
         return listUser;
     }
-
+    
     public void setListUser(ArrayList<Utilisateurs> listUser) {
         this.listUser = listUser;
     }
@@ -83,13 +83,13 @@ public class UtilisateursManageur implements Serializable {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
         session.invalidate();
-        return "toLoginFromAll";
+        return "toIndexFromAll";
     }
     
     public String login() throws NoSuchAlgorithmException, NoSuchProviderException{
         // byte[] salt = getSalt();
         currentUser = utilisateursFacade.findOne(mailUtil, get_SHA_256_SecurePassword(mdpUtil));
-      
+        
         if (currentUser.getNomUtil() != null ) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
             HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
@@ -128,7 +128,7 @@ public class UtilisateursManageur implements Serializable {
     }
     
     @PostConstruct
-    public void initUtilisateurs(){   
+    public void initUtilisateurs(){
         this.listUser = new ArrayList();
         this.listUser.addAll(utilisateursFacade.findAll());
     }

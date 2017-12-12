@@ -1,0 +1,55 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <h:panelGroup rendered="#{empty utilisateursManageur.currentUser.nomUtil}">
+        <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+            
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/BusinessConsulting/faces/index.xhtml">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/BusinessConsulting/faces/login.xhtml">Login</a>
+                    </li>
+                </ul>
+                <h:form id="formConnection" class="form-inline my-2 my-lg-0">
+                    <div class="form-group">
+                        <h:inputText class="form-control mr-sm-2" id="mailUtil" value="#{utilisateursManageur.mailUtil}" a:placeholder="Email">
+                            <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                        </h:inputText>                       
+                        <h:inputSecret class="form-control mr-sm-2" id="mdpUtil" value="#{utilisateursManageur.mdpUtil}" a:placeholder="Password" />
+                        <h:commandButton value="Valider" type="submit" class="btn btn-outline-primary my-2 my-sm-0" action="#{utilisateursManageur.login()}" /> 
+                    </div>
+                </h:form>
+            </div>
+        </nav>
+    </h:panelGroup>
+    <h:panelGroup rendered="#{not empty utilisateursManageur.currentUser.nomUtil}">
+        <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+            
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/BusinessConsulting/faces/index.xhtml">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/BusinessConsulting/faces/administration/compte.xhtml">Mon compte</a>
+                    </li>
+                </ul>
+                <p class="nav-item">#{utilisateursManageur.currentUser.nomUtil}</p>
+                <h:form id="formDeconnection" class="form-inline my-2 my-lg-0">
+                    <div class="form-group">
+                        <h:commandButton value="Déconnexion" type="submit" class="btn btn-outline-primary my-2 my-sm-0" action="#{utilisateursManageur.logout()}" /> 
+                    </div>
+                </h:form>
+            </div>
+        </nav>
+    </h:panelGroup>
+    
+    
+</ui:composition>
