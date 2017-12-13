@@ -25,13 +25,13 @@
                         <h:inputSecret class="form-control mr-sm-2" id="mdpUtil" value="#{utilisateursManageur.mdpUtil}" a:placeholder="Password" />
                         <h:commandButton value="Valider" type="submit" class="btn btn-outline-primary my-2 my-sm-0" action="#{utilisateursManageur.login()}" /> 
                     </div>
+                    <h:message class="nav-item" for="formConnection" showSummary="true" showDetail="false" />
                 </h:form>
             </div>
         </nav>
     </h:panelGroup>
     <h:panelGroup rendered="#{not empty utilisateursManageur.currentUser.nomUtil}">
-        <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
-            
+        <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">            
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">

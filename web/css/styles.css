@@ -6651,10 +6651,15 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
   .hidden-print {
     display: none !important; } }
 
-nav p.nav-item {
+nav p.nav-item, nav span.nav-item {
   color: white;
   margin: 0 20px 0 0;
   line-height: 35px; }
+nav span.nav-item {
+  font-size: 10px; }
+nav form#formConnection {
+  flex-direction: column;
+  align-items: left; }
 
 /*
 To change this license header, choose License Headers in Project Properties.
