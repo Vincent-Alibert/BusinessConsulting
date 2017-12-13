@@ -1,7 +1,14 @@
 nav{
-    p.nav-item{
+    p.nav-item, span.nav-item{
         color:white;
         margin: 0 20px 0 0;
         line-height: 35px;
+    }
+    span.nav-item{
+        font-size: 10px;
+    }
+    form#formConnection{
+        flex-direction: column;
+        align-items: left;
     }
 }

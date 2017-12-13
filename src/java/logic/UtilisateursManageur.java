@@ -100,7 +100,7 @@ public class UtilisateursManageur implements Serializable {
         FacesContext context = FacesContext.getCurrentInstance();
         FacesMessage message = new FacesMessage();
         message.setSeverity(FacesMessage.SEVERITY_INFO);
-        message.setSummary("Impossible de se connecter. Veuillez vérifier votre identifiants ou votre mot de passe");
+        message.setSummary("Impossible de se connecter. Veuillez vérifier votre identifiant ou votre mot de passe");
         context.addMessage("formConnection", message);
         return "";
     }

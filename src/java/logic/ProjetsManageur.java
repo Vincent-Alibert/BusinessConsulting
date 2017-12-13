@@ -10,7 +10,10 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import model.Projets;
 import model.Utilisateurs;
 
@@ -26,7 +29,9 @@ public class ProjetsManageur implements Serializable {
     private int idProjet;
     private ArrayList<Projets> listProjet;
     private Projets currentProjet;
-    private int radioChoise;
+    private Date dateDebutProj;
+    private Date dateFinProj;
+    private int etatProjet;
     
     @EJB
             ProjetsFacade projetsFacade;
@@ -77,13 +82,30 @@ public class ProjetsManageur implements Serializable {
         this.listProjet = listProjet;
     }
     
-    public int getRadioChoise() {
-        return radioChoise;
+    public Date getDateDebutProj() {
+        return dateDebutProj;
     }
     
-    public void setRadioChoise(int radioChoise) {
-        this.radioChoise = radioChoise;
+    public void setDateDebutProj(Date dateDebutProj) {
+        this.dateDebutProj = dateDebutProj;
     }
+    
+    public Date getDateFinProj() {
+        return dateFinProj;
+    }
+    
+    public void setDateFinProj(Date dateFinProj) {
+        this.dateFinProj = dateFinProj;
+    }
+    
+    public int getEtatProjet() {
+        return etatProjet;
+    }
+    
+    public void setEtatProjet(int etatProjet) {
+        this.etatProjet = etatProjet;
+    }
+    
     
     /* méthode */
     public int arraySize(){
@@ -112,14 +134,44 @@ public class ProjetsManageur implements Serializable {
     public void load(Utilisateurs currentUser){
         try{
             setIdProjet(Integer.parseInt(idProjetRequest));
-            
-            System.out.println("idProjetRequest : "+idProjetRequest);
             currentProjet = projetsFacade.findByIdAndUser(idProjet, currentUser);
-            
             listProjet = new ArrayList();
             listProjet.add(currentProjet);
+            dateDebutProj = currentProjet.getDateDebutProj();
+            dateFinProj = currentProjet.getDateFinProj();
+            etatProjet = currentProjet.getEtatFinal();
         } catch(NumberFormatException e) {
             currentProjet = new Projets();
         }
+    }
+    
+    public void modifProjet(){
+        try{
+            if(dateFinProj == null){
+                dateFinProj = new Date(0);
+            }
+            currentProjet.setDateDebutProj(dateDebutProj);
+            currentProjet.setDateFinProj(dateFinProj);
+            currentProjet.setEtatFinal(etatProjet);
+            
+            projetsFacade.edit(currentProjet);
+            
+            dateDebutProj = null;
+            dateFinProj = null;
+            
+            FacesContext context = FacesContext.getCurrentInstance();
+            FacesMessage message = new FacesMessage();
+            message.setSeverity(FacesMessage.SEVERITY_INFO);
+            message.setSummary("Le projet a bien été mis à jour.");
+            context.addMessage("modifProjet", message);
+            
+        } catch (Exception e) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            FacesMessage message = new FacesMessage();
+            message.setSeverity(FacesMessage.SEVERITY_INFO);
+            message.setSummary("Le projet n'a pas pu être mis à jour. Veuillez vérifier les informations rentrées.");
+            context.addMessage("modifProjet", message);
+        }
+        
     }
 }

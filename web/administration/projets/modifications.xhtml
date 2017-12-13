@@ -3,7 +3,8 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">    
+                xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+    
     <ui:define name="content-main">
         <section id="projet-modification">
             <div class="container">
@@ -12,11 +13,11 @@
                         <h1>Modification du projet #{projetsManageur.currentProjet.libelleProj}</h1>
                     </div>
                     <div class="col-12">
-                        <h:form>
+                        <h:form id="modifProjet">
                             <div class="form-group row">
                                 <label for="date-start" class="col-2 col-form-label">Date de début</label>
                                 <div class="col-5">
-                                    <h:inputText id="date-start" class="form-control" value="#{projetsManageur.currentProjet.dateDebutProj}" size="20" required="true" >
+                                    <h:inputText id="date-start" class="form-control" value="#{projetsManageur.dateDebutProj}" size="20" required="true" >
                                         <f:convertDateTime pattern="d/M/yyyy" />
                                     </h:inputText>
                                 </div>
@@ -24,7 +25,7 @@
                             <div class="form-group row">
                                 <label for="date-end" class="col-2 col-form-label">Date de fin</label>
                                 <div class="col-5">
-                                    <h:inputText id="date-end" class="form-control" value="#{projetsManageur.currentProjet.dateFinProj}" size="20" required="true" >
+                                    <h:inputText id="date-end" class="form-control" value="#{projetsManageur.dateFinProj}" size="20" required="false" >
                                         <f:convertDateTime pattern="d/M/yyyy" />
                                     </h:inputText>
                                 </div>
@@ -32,16 +33,19 @@
                             <div class="form-group row">
                                 <label for='client' class="col-2 col-form-label">état du projet</label>
                                 <div class="col-3">
-                                    <select class="form-control" id="client">
-                                        <option value="1">En cours</option>
-                                        <option value="2">Réussi</option>
-                                        <option value="3">Echec</option>
-                                    </select>
+                                    <h:selectOneMenu class="form-control" id="secteur" value="#{projetsManageur.etatProjet}" >
+                                        <f:selectItem itemValue = "0" itemLabel = "En cours" /> 
+                                        <f:selectItem itemValue = "1" itemLabel = "Reussi" /> 
+                                        <f:selectItem itemValue = "2" itemLabel = "Echec" />                                        
+                                    </h:selectOneMenu>
                                 </div>
                             </div>
                             
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </h:form>
+                            <h:commandButton value="Valider" type="submit" id="button" class="btn btn-outline-primary" action="#{projetsManageur.modifProjet()}" />
+                       </h:form>
+                        <div class="message">
+                            <h:message for="modifProjet" showSummary="true" showDetail="false"/>
+                        </div>
                     </div>
                 </div>
             </div> 
