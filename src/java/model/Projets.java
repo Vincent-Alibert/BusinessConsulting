@@ -8,7 +8,6 @@ package model;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +22,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -46,38 +44,36 @@ public class Projets implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
+    
     @Column(name = "idProjet")
-    private Integer idProjet;
-    @Basic(optional = false)
-    @NotNull
+    private Integer idProjet;    
+    
     @Size(min = 1, max = 255)
     @Column(name = "libelleProj")
-    private String libelleProj;
-    @Basic(optional = false)
-    @NotNull
+    private String libelleProj;    
+    
     @Column(name = "montantProj")
-    private double montantProj;
-    @Basic(optional = false)
-    @NotNull
+    private double montantProj;    
+    
     @Column(name = "dateDebutProj")
     @Temporal(TemporalType.DATE)
-    private Date dateDebutProj;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "dateFinProj")
+    private Date dateDebutProj;    
+    
+    @Column(name = "dateFinProj", nullable = true)
     @Temporal(TemporalType.DATE)
-    private Date dateFinProj;
-    @Basic(optional = false)
-    @NotNull
+    private Date dateFinProj;    
+    
     @Column(name = "etatFinal")
     private int etatFinal;
+    
     @JoinColumn(name = "fk_idClt", referencedColumnName = "idClient")
     @ManyToOne(optional = false)
     private Clients fkidClt;
+    
     @JoinColumn(name = "fk_idChefProj", referencedColumnName = "idUtil")
     @ManyToOne(optional = false)
     private Utilisateurs fkidChefProj;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkidProjet")
     private Collection<Phases> phasesCollection;
 
