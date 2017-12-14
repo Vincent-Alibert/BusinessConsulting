@@ -6665,17 +6665,18 @@ and open the template in the editor.
     Created on : 27 nov. 2017, 13:31:27
     Author     : valibert
 */
-.compte-project {
-  padding-bottom: 20px; }
-  .compte-project ul {
-    list-style: none; }
-  .compte-project a {
-    color: black; }
-    .compte-project a:hover {
-      text-decoration: none; }
+.compte-project ul {
+  list-style: none; }
+.compte-project a {
+  color: black; }
+  .compte-project a:hover {
+    text-decoration: none; }
+
+#content-phase {
+  padding: 20px 0 0; }
 
 #projet {
-  padding: 20px 0; }
+  padding: 20px 0 0; }
   #projet ul {
     list-style: none; }
     #projet ul a {
@@ -6695,7 +6696,7 @@ and open the template in the editor.
     Author     : valibert
 */
 #projet-modification {
-  padding: 20px 0; }
+  padding: 20px 0 0; }
   #projet-modification .radio-choise tr {
     margin-left: 10px;
     display: table; }
@@ -6728,7 +6729,11 @@ ul.card-ul {
   border-radius: 5px;
   padding: 10px; }
 
+.return {
+  margin-top: 20px; }
+
 footer {
+  margin-top: 20px;
   padding-top: 20px;
   padding-bottom: 10px;
   color: white;

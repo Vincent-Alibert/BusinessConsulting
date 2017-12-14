@@ -6,6 +6,7 @@
 @import "lib/bootstrap.scss"; 
 @import "components/nav.scss"; 
 @import "pages/compte.scss"; 
+@import "pages/phases.scss"; 
 @import "pages/projets.scss"; 
 @import "pages/modification-projets.scss"; 
 @import "commun/commun.scss"; 
@@ -23,7 +24,11 @@
     border-radius: 5px;
     padding: 10px;
 }
+.return{
+    margin-top: 20px;
+}
 footer{
+    margin-top: 20px;
     padding-top: 20px;
     padding-bottom: 10px;
     color: white;

@@ -1,0 +1,23 @@
+@charset "UTF-8";
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 1 d├®c. 2017, 16:17:10
+    Author     : valibert
+*/
+#projet-modification {
+  padding: 20px 0 0; }
+  #projet-modification .radio-choise tr {
+    margin-left: 10px;
+    display: table; }
+    #projet-modification .radio-choise tr td:first-of-type {
+      display: none; }
+    #projet-modification .radio-choise tr td input {
+      margin-right: 10px; }
+    #projet-modification .radio-choise tr td label {
+      margin-right: 10px; }
+
+/*# sourceMappingURL=modification-projets.css.map */

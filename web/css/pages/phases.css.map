@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,cAAc;EACV,OAAO,EAAE,QAAQ",
+"sources": ["../../scss/pages/phases.scss"],
+"names": [],
+"file": "phases.css"
+}

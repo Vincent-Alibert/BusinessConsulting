@@ -9,9 +9,9 @@
         <f:viewAction onPostback="true" action="#{phasesManageur.load(projetsManageur.currentProjet)}" />
     </f:metadata>
     <ui:define name="content-main">
-        <section class="content-phase">
+        <section id="content-phase">
             <div class="container">
-                <h:panelGroup rendered="#{phasesManageur.listPhases.size() == 0}">
+                <h:panelGroup rendered="#{empty phasesManageur.currentPhase.libellePhase}">
                     <div class="row">
                         <div class="col">
                             <h2>Bonjour, il semblerait que cette phase n'existe pas ou que vous n'ayez pas les droits d'accès à cette phase.</h2>
@@ -20,7 +20,7 @@
                     </div>
                 </h:panelGroup>
                 
-                <h:panelGroup rendered="#{phasesManageur.listPhases.size() > 0}">
+                <h:panelGroup rendered="#{not empty phasesManageur.currentPhase.libellePhase}">
                     <div class="row">
                         <div class="col-12" id="projet-libelle">
                             <h1>#{phasesManageur.currentPhase.libellePhase}</h1>
@@ -68,8 +68,8 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <a href="modifications.xhtml" class="btn btn-outline-primary">Modifier des informations</a>
-                            <a href="../phases/ajout-phase.xhtml" class="btn btn-outline-primary">Ajouter une nouvelle phase</a>
+                            <a class="btn btn-outline-primary" href="../projets/projets.xhtml?id=#{projetsManageur.currentProjet.idProjet}">Retourner sur le projet</a> 
+                            <a href="modifications-detail.xhtml" class="btn btn-outline-primary">Modifier des informations</a>
                         </div>
                     </div>
                 </h:panelGroup> 

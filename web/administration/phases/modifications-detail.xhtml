@@ -6,14 +6,12 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"> 
     
     <ui:define name="content-main">
-        <section id="projet-modification">
+        <section id="phase-modification">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h1>#{projetsManageur.currentProjet.libelleProj} <em>(Modification)</em></h1>
+                        <h1>#{phasesManageur.currentPhase.libellePhase} <em>(Modification)</em></h1>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-12">
                         <h:form id="modifProjet">
                             <div class="form-group row">
@@ -44,15 +42,14 @@
                             </div>
                             
                             <h:commandButton value="Valider" type="submit" id="button" class="btn btn-outline-primary" action="#{projetsManageur.modifProjet()}" />
-                        </h:form>
+                       </h:form>
                         <div class="message">
                             <h:message for="modifProjet" showSummary="true" showDetail="false"/>
                         </div>
-                        
                     </div>
                 </div>
                 <div class="return row">
-                    <a class="btn btn-outline-primary" href="projets.xhtml?id=#{projetsManageur.currentProjet.idProjet}">Retourner sur le projet</a>
+                    <a class="btn btn-outline-primary" href="phases.xhtml?id=#{phasesManageur.currentPhase.idPhase}">Retourner sur la phase</a>
                 </div>
             </div> 
         </section>

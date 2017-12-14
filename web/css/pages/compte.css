@@ -7,17 +7,11 @@ and open the template in the editor.
     Created on : 27 nov. 2017, 13:31:27
     Author     : valibert
 */
+.compte-project ul {
+  list-style: none; }
+.compte-project a {
+  color: black; }
+  .compte-project a:hover {
+    text-decoration: none; }
 
-.compte{
-    &-project{
-        ul{
-            list-style: none;
-        }
-        a{
-            color:black;
-            &:hover{
-                text-decoration: none;
-            }
-        }
-    }
-}
+/*# sourceMappingURL=compte.css.map */
