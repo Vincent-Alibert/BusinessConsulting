@@ -28,8 +28,11 @@ public class PhasesManageur implements Serializable {
     int etatAvancement;
     Phases currentPhase;
     int secteurChoise;
+    int idPhase;
+    String IdPhaseRequest;
     Secteurs currentSecteur;
     ArrayList<Secteurs> listSecteurs;
+    ArrayList<Phases> listPhases;
     
     @EJB
             PhasesFacade phasesFacade;
@@ -129,6 +132,30 @@ public class PhasesManageur implements Serializable {
     public void setListSecteurs(ArrayList<Secteurs> listSecteurs) {
         this.listSecteurs = listSecteurs;
     }
+
+    public ArrayList<Phases> getListPhases() {
+        return listPhases;
+    }
+
+    public void setListPhases(ArrayList<Phases> listPhases) {
+        this.listPhases = listPhases;
+    }
+
+    public int getIdPhase() {
+        return idPhase;
+    }
+
+    public void setIdPhase(int idPhase) {
+        this.idPhase = idPhase;
+    }
+
+    public String getIdPhaseRequest() {
+        return IdPhaseRequest;
+    }
+
+    public void setIdPhaseRequest(String IdPhaseRequest) {
+        this.IdPhaseRequest = IdPhaseRequest;
+    }
     
     /*  méthode */
     public String addPhase(Projets currentProjet){
@@ -161,6 +188,21 @@ public class PhasesManageur implements Serializable {
         }
         return "";
     }
+    
+    public void load(Projets currentProjet){
+        try{
+            setIdPhase(Integer.parseInt(IdPhaseRequest));
+            currentPhase = phasesFacade.findOnByIdAndProjet(idPhase, currentProjet);
+            listPhases = new ArrayList();
+            listPhases.add(currentPhase);
+            dateDebut= currentPhase.getDateDebutPhase();
+            dateFin = currentPhase.getDateFinPhase();
+            
+        } catch(NumberFormatException e) {
+            currentPhase = new Phases();
+        }
+    }
+    
     public String deletePhase(int idPhase){
         try{
             currentPhase = phasesFacade.findOnById(idPhase);

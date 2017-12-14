@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import model.Phases;
+import model.Projets;
 
 /**
  *
@@ -35,6 +36,18 @@ public class PhasesFacade extends AbstractFacade<Phases> {
         try {
             Query query = em.createNamedQuery("Phases.findByIdPhase", Phases.class);
             query.setParameter("idPhase", idPhase);
+            phase = (Phases)query.getSingleResult();
+        } catch (Exception e) {
+            phase = new Phases();
+        }
+        return phase;
+    }
+    public Phases findOnByIdAndProjet(int idPhase, Projets currentProjet){
+        Phases phase;        
+        try {
+            Query query = em.createNamedQuery("Phases.findOnByIdAndProjet", Phases.class);
+            query.setParameter("idPhase", idPhase);
+            query.setParameter("idProjet", currentProjet);
             phase = (Phases)query.getSingleResult();
         } catch (Exception e) {
             phase = new Phases();

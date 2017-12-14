@@ -1,9 +1,4 @@
 @charset "UTF-8";
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
 /* 
     Created on : 26 nov. 2017, 11:40:24
     Author     : valibert
@@ -6710,6 +6705,15 @@ and open the template in the editor.
       margin-right: 10px; }
     #projet-modification .radio-choise tr td label {
       margin-right: 10px; }
+
+ul.card-ul {
+  list-style: none; }
+  ul.card-ul a {
+    color: black; }
+    ul.card-ul a:hover {
+      text-decoration: none; }
+  ul.card-ul .card {
+    padding: 10px; }
 
 /*message d'erreur*/
 .message-error {
