@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,UAAW;EACP,UAAU,EAAC,IAAI;EACf,YAAC;IACG,KAAK,EAAG,KAAK;IACb,kBAAO;MACH,eAAe,EAAE,IAAI;EAG7B,gBAAK;IACD,OAAO,EAAE,IAAI",
+"sources": ["../../scss/commun/commun.scss"],
+"names": [],
+"file": "commun.css"
+}

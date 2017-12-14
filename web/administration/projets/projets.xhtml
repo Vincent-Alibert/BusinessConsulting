@@ -12,7 +12,7 @@
         <section id="projet">
             <div class="container">
                 
-                <h:panelGroup rendered="#{projetsManageur.arraySize() == 0}">
+                <h:panelGroup rendered="#{empty projetsManageur.currentProjet.idProjet}">
                     <div class="row">
                         <div class="col">
                             <h2>Bonjour, il semblerait que ce projet n'existe pas ou que vous n'ayez pas les droits d'accès à ce projet.</h2>
@@ -21,7 +21,7 @@
                     </div>
                 </h:panelGroup>
                 
-                <h:panelGroup rendered="#{projetsManageur.arraySize() > 0}">
+                <h:panelGroup rendered="#{not empty projetsManageur.currentProjet.idProjet}">
                     <div class="row">
                         <div class="col-12" id="projet-libelle">
                             <h1>#{projetsManageur.currentProjet.libelleProj}</h1>
@@ -31,15 +31,18 @@
                         </div>
                         
                         <div id="projet-date" class="col-12">
-                            <p id="projet-date-debut">Date de Début du projet : 
+                            <p id="projet-date-debut">Débuté le : 
                                 <h:outputText value="#{projetsManageur.currentProjet.dateDebutProj}">
-                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
                                 </h:outputText>
                             </p>
-                            <p id="projet-date-fin">Date de fin du projet : <h:outputText value="#{projetsManageur.currentProjet.dateFinProj}">
-                                    <f:convertDateTime pattern="MM/dd/yyyy" />
-                                </h:outputText>
-                            </p>
+                            <h:panelGroup rendered="#{projetsManageur.currentProjet.dateFinProj.after(projetsManageur.dateOld)}">
+                                <p id="projet-date-fin">Date de fin du projet :  
+                                    <h:outputText value="#{projetsManageur.currentProjet.dateFinProj}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </h:outputText>
+                                </p>
+                            </h:panelGroup>
                             
                         </div>
                         <div id="projet-etat" class="col-12">
@@ -61,11 +64,14 @@
                                         </ui:repeat>
                                         <p class="item-phases-date-debut card-text">Date de Début de la phase : 
                                             <h:outputText value="#{itemPhase.dateDebutPhase}">
-                                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                                            </h:outputText></p> 
+                                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                                            </h:outputText>
+                                        </p> 
+                                        
                                         <p class="item-phases-date-fin card-text">Date de fin de la phase : <h:outputText value="#{itemPhase.dateFinPhase}">
-                                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                                            </h:outputText></p>
+                                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                                            </h:outputText>
+                                        </p>
                                         <p>Intervenant : <ui:repeat value="#{itemPhase.detailConsultPhasesCollection}" var="itemConsultant">#{itemConsultant.fkidUtil.nomUtil} #{itemConsultant.fkidUtil.prenomUtil}</ui:repeat></p>                                        
                                     </a>
                                     <h:form id="supPhase" >

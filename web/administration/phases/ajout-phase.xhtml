@@ -43,16 +43,16 @@
                                 <label for="date-start" class="col-3 col-form-label">Date de début</label>
                                 <div class="col-5">
                                     <h:inputText required="true" label="Cette saisie" id="date-start" class="form-control" value="#{phasesManageur.dateDebut}">  
-                                        <f:convertDateTime pattern="MM/dd/yyyy" />  
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />  
                                     </h:inputText>
                                     <h:message styleClass="message-error" for="date-start" />
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="date-end" class="col-3 col-form-label">Date de début</label>
+                                <label for="date-end" class="col-3 col-form-label">Date de fin</label>
                                 <div class="col-5">
                                     <h:inputText required="true" label="Cette saisie" id="date-end" class="form-control" value="#{phasesManageur.dateFin}">  
-                                        <f:convertDateTime pattern="MM/dd/yyyy" />  
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />  
                                     </h:inputText>
                                     <h:message  styleClass="message-error" for="date-end" />
                                 </div>

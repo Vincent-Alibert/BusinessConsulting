@@ -1,0 +1,10 @@
+ul.card-ul {
+  list-style: none; }
+  ul.card-ul a {
+    color: black; }
+    ul.card-ul a:hover {
+      text-decoration: none; }
+  ul.card-ul .card {
+    padding: 10px; }
+
+/*# sourceMappingURL=commun.css.map */

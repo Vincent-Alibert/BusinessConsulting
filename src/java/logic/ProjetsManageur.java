@@ -27,11 +27,11 @@ public class ProjetsManageur implements Serializable {
     
     private String idProjetRequest;
     private int idProjet;
-    private ArrayList<Projets> listProjet;
     private Projets currentProjet;
     private Date dateDebutProj;
     private Date dateFinProj;
     private int etatProjet;
+    private Date dateOld;
     
     @EJB
             ProjetsFacade projetsFacade;
@@ -74,14 +74,6 @@ public class ProjetsManageur implements Serializable {
         this.idProjet = idProjet;
     }
     
-    public ArrayList<Projets> getListProjet() {
-        return listProjet;
-    }
-    
-    public void setListProjet(ArrayList<Projets> listProjet) {
-        this.listProjet = listProjet;
-    }
-    
     public Date getDateDebutProj() {
         return dateDebutProj;
     }
@@ -105,12 +97,18 @@ public class ProjetsManageur implements Serializable {
     public void setEtatProjet(int etatProjet) {
         this.etatProjet = etatProjet;
     }
+
+    public Date getDateOld() {
+        dateOld = new Date(0);
+        return dateOld;
+    }
+
+    public void setDateOld(Date dateOld) {
+        this.dateOld = dateOld;
+    }
     
     
     /* méthode */
-    public int arraySize(){
-        return listProjet.size();
-    }
     
     public String etatProjet(){
         String etat;
@@ -135,8 +133,6 @@ public class ProjetsManageur implements Serializable {
         try{
             setIdProjet(Integer.parseInt(idProjetRequest));
             currentProjet = projetsFacade.findByIdAndUser(idProjet, currentUser);
-            listProjet = new ArrayList();
-            listProjet.add(currentProjet);
             dateDebutProj = currentProjet.getDateDebutProj();
             dateFinProj = currentProjet.getDateFinProj();
             etatProjet = currentProjet.getEtatFinal();
