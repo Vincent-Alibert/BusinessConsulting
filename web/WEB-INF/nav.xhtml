@@ -3,7 +3,8 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     
     <h:panelGroup rendered="#{empty utilisateursManageur.currentUser.nomUtil}">
         <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
@@ -17,7 +18,8 @@
                         <a class="nav-link" href="/BusinessConsulting/faces/login.xhtml">Login</a>
                     </li>
                 </ul>
-                <h:form id="formConnection" class="form-inline my-2 my-lg-0">
+                <c:if test="#{view.viewId != '/login.xhtml'}">
+                    <h:form id="formConnection" class="form-inline my-2 my-lg-0">
                     <div class="form-group">
                         <h:inputText class="form-control mr-sm-2" id="mailUtil" value="#{utilisateursManageur.mailUtil}" a:placeholder="Email">
                             <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
@@ -27,6 +29,8 @@
                     </div>
                     <h:message class="nav-item" for="formConnection" showSummary="true" showDetail="false" />
                 </h:form>
+                </c:if>
+                
             </div>
         </nav>
     </h:panelGroup>

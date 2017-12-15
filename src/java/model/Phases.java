@@ -35,6 +35,7 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "Phases.findAll", query = "SELECT p FROM Phases p"),
     @NamedQuery(name = "Phases.findByIdPhase", query = "SELECT p FROM Phases p WHERE p.idPhase = :idPhase"),
+    @NamedQuery(name = "Phases.nbreHeurePassee", query = "SELECT SUM(d.nbrHeures) FROM DetailConsultPhases d WHERE d.fkidPhase = :idPhase"),
     @NamedQuery(name = "Phases.findOnByIdAndProjet", query = "SELECT p FROM Phases p WHERE p.idPhase = :idPhase AND P.fkidProjet = :idProjet"),
     @NamedQuery(name = "Phases.findByLibellePhase", query = "SELECT p FROM Phases p WHERE p.libellePhase = :libellePhase"),
     @NamedQuery(name = "Phases.findByMontantPhase", query = "SELECT p FROM Phases p WHERE p.montantPhase = :montantPhase"),
