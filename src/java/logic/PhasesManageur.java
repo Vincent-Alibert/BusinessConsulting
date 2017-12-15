@@ -21,18 +21,18 @@ import model.Secteurs;
 @Named(value = "phasesManageur")
 @SessionScoped
 public class PhasesManageur implements Serializable {
-    String libelle;
-    double montant;
-    Date dateDebut;
-    Date dateFin;
-    int etatAvancement;
-    Phases currentPhase;
-    int secteurChoise;
-    int idPhase;
-    String IdPhaseRequest;
-    Secteurs currentSecteur;
-    ArrayList<Secteurs> listSecteurs;
-    ArrayList<Phases> listPhases;
+    private String libelle;
+    private double montant;
+    private Date dateDebut;
+    private Date dateFin;
+    private int etatAvancement;
+    private Phases currentPhase;
+    private int secteurChoise;
+    private int idPhase;
+    private String IdPhaseRequest;
+    private Secteurs currentSecteur;
+    private ArrayList<Secteurs> listSecteurs;
+    private ArrayList<Phases> listPhases;
     
     @EJB
             PhasesFacade phasesFacade;
@@ -132,30 +132,31 @@ public class PhasesManageur implements Serializable {
     public void setListSecteurs(ArrayList<Secteurs> listSecteurs) {
         this.listSecteurs = listSecteurs;
     }
-
+    
     public ArrayList<Phases> getListPhases() {
         return listPhases;
     }
-
+    
     public void setListPhases(ArrayList<Phases> listPhases) {
         this.listPhases = listPhases;
     }
-
+    
     public int getIdPhase() {
         return idPhase;
     }
-
+    
     public void setIdPhase(int idPhase) {
         this.idPhase = idPhase;
     }
-
+    
     public String getIdPhaseRequest() {
         return IdPhaseRequest;
     }
-
+    
     public void setIdPhaseRequest(String IdPhaseRequest) {
         this.IdPhaseRequest = IdPhaseRequest;
-    }
+    }    
+    
     
     /*  méthode */
     public String addPhase(Projets currentProjet){
@@ -221,5 +222,11 @@ public class PhasesManageur implements Serializable {
             context.addMessage("supPhase", message);
         }
         return "";
+    }
+    
+    public int nbreHeurePassee (){
+        int nbreHeure;
+        nbreHeure = phasesFacade.nbreHeurePassee(currentPhase);
+        return nbreHeure;
     }
 }
