@@ -77,17 +77,7 @@
                                                 <f:convertDateTime pattern="dd/MM/yyyy" />
                                             </h:outputText>
                                         </p>
-                                        <p>Intervenant : 
-                                            <ui:repeat rendered="#{itemPhase.detailConsultPhasesCollection.size() == 0}" value="#{itemPhase.detailConsultPhasesCollection}" var="itemConsultant">
-                                               Il y a pas d'intervant sur cette phase pour le moment.
-                                            </ui:repeat>
-                                            <ui:repeat rendered="#{itemPhase.detailConsultPhasesCollection.size() == 1}" value="#{itemPhase.detailConsultPhasesCollection}" var="itemConsultant">
-                                                #{itemConsultant.fkidUtil.nomUtil} #{itemConsultant.fkidUtil.prenomUtil}
-                                            </ui:repeat>
-                                            <ui:repeat rendered="#{itemPhase.detailConsultPhasesCollection.size() ge 1}" value="#{itemPhase.detailConsultPhasesCollection}" var="itemConsultant">
-                                                <span class="intervenant">#{itemConsultant.fkidUtil.nomUtil} #{itemConsultant.fkidUtil.prenomUtil}</span>                                               
-                                            </ui:repeat>
-                                        </p>                                        
+                                        <p>Nombre d'intervention : #{itemPhase.detailConsultPhasesCollection.size()}</p>                                        
                                     </a>
                                     <h:form id="supPhase" >
                                         <h:commandButton  value="Supprimer la phase" type="submit" id="button" class="btn btn-sm btn-outline-primary" action="#{phasesManageur.deletePhase(itemPhase.idPhase)}" >
@@ -104,7 +94,7 @@
                     <div class="row">
                         <div class="col-12">
                             <a href="modifications.xhtml" class="btn btn-outline-primary">Modifier des informations</a>
-                            <a href="../phases/ajout-phase.xhtml" class="btn btn-outline-primary">Ajouter une nouvelle phase</a>
+                            <h:panelGroup rendered="#{projetsManageur.currentProjet.etatFinal == 0}" ><a href="../phases/ajout-phase.xhtml" class="btn btn-outline-primary">Ajouter une nouvelle phase</a></h:panelGroup>
                         </div>
                     </div>
                 </h:panelGroup>                

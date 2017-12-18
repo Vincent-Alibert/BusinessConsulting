@@ -155,7 +155,7 @@ public class PhasesManageur implements Serializable {
     
     public void setIdPhaseRequest(String IdPhaseRequest) {
         this.IdPhaseRequest = IdPhaseRequest;
-    }    
+    }
     
     
     /*  méthode */
@@ -228,5 +228,39 @@ public class PhasesManageur implements Serializable {
         int nbreHeure;
         nbreHeure = phasesFacade.nbreHeurePassee(currentPhase);
         return nbreHeure;
+    }
+    
+    public void modifPhase(){
+        try{
+            if(dateFin == null || dateDebut.before(dateFin)){
+                if(dateFin == null){
+                    dateFin = new Date(0);
+                }
+                currentPhase.setDateDebutPhase(dateDebut);
+                currentPhase.setDateFinPhase(dateFin);
+                phasesFacade.edit(currentPhase);
+                dateDebut = null;
+                dateFin = null;                
+                FacesContext context = FacesContext.getCurrentInstance();
+                FacesMessage message = new FacesMessage();
+                message.setSeverity(FacesMessage.SEVERITY_INFO);
+                message.setSummary("La phase a bien été mis à jour.");
+                context.addMessage("modifPhase", message);
+            } else {
+                FacesContext context = FacesContext.getCurrentInstance();
+                FacesMessage message = new FacesMessage();
+                message.setSeverity(FacesMessage.SEVERITY_INFO);
+                message.setSummary("La phase n'a pas pu être mis à jour. Veuillez vérifier les informations rentrées.");
+                context.addMessage("modifPhase", message);
+            }
+            
+        } catch (Exception e) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            FacesMessage message = new FacesMessage();
+            message.setSeverity(FacesMessage.SEVERITY_INFO);
+            message.setSummary("La phase n'a pas pu être mis à jour. Veuillez vérifier les informations rentrées.");
+            context.addMessage("modifPhase", message);
+        }
+        
     }
 }

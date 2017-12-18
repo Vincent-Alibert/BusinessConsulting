@@ -9,7 +9,6 @@ import facade.ProjetsFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -25,7 +24,7 @@ import model.Utilisateurs;
 @SessionScoped
 public class ProjetsManageur implements Serializable {
     
-    private String idProjetRequest;
+    private String idProjetRequest, libelle;
     private int idProjet;
     private Projets currentProjet;
     private Date dateDebutProj;
@@ -53,6 +52,14 @@ public class ProjetsManageur implements Serializable {
     
     public String getIdProjetRequest() {
         return idProjetRequest;
+    }
+
+    public String getLibelle() {
+        return libelle;
+    }
+
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
     }
     
     public void setIdProjetRequest(String idProjetRequest) {
@@ -145,6 +152,7 @@ public class ProjetsManageur implements Serializable {
             dateDebutProj = currentProjet.getDateDebutProj();
             dateFinProj = currentProjet.getDateFinProj();
             etatProjet = currentProjet.getEtatFinal();
+            libelle = currentProjet.getLibelleProj();
         } catch(NumberFormatException e) {
             currentProjet = new Projets();
         }
@@ -152,24 +160,29 @@ public class ProjetsManageur implements Serializable {
     
     public void modifProjet(){
         try{
-            if(dateFinProj == null){
-                dateFinProj = new Date(0);
+            if(dateFinProj == null || dateDebutProj.before(dateFinProj)){
+                if(dateFinProj == null){
+                    dateFinProj = new Date(0);
+                }
+                currentProjet.setLibelleProj(libelle);
+                currentProjet.setDateDebutProj(dateDebutProj);
+                currentProjet.setDateFinProj(dateFinProj);
+                currentProjet.setEtatFinal(etatProjet);
+                projetsFacade.edit(currentProjet);
+                dateDebutProj = null;
+                dateFinProj = null;
+                FacesContext context = FacesContext.getCurrentInstance();
+                FacesMessage message = new FacesMessage();
+                message.setSeverity(FacesMessage.SEVERITY_INFO);
+                message.setSummary("Le projet a bien été mis à jour.");
+                context.addMessage("modifProjet", message);
+            } else {
+                FacesContext context = FacesContext.getCurrentInstance();
+                FacesMessage message = new FacesMessage();
+                message.setSeverity(FacesMessage.SEVERITY_INFO);
+                message.setSummary("Le projet n'a pas pu être mis à jour. Veuillez vérifier les informations rentrées.");
+                context.addMessage("modifProjet", message);
             }
-            currentProjet.setDateDebutProj(dateDebutProj);
-            currentProjet.setDateFinProj(dateFinProj);
-            currentProjet.setEtatFinal(etatProjet);
-            
-            projetsFacade.edit(currentProjet);
-            
-            dateDebutProj = null;
-            dateFinProj = null;
-            
-            FacesContext context = FacesContext.getCurrentInstance();
-            FacesMessage message = new FacesMessage();
-            message.setSeverity(FacesMessage.SEVERITY_INFO);
-            message.setSummary("Le projet a bien été mis à jour.");
-            context.addMessage("modifProjet", message);
-            
         } catch (Exception e) {
             FacesContext context = FacesContext.getCurrentInstance();
             FacesMessage message = new FacesMessage();

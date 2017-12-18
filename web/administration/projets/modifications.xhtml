@@ -17,19 +17,28 @@
                     <div class="col-12">
                         <h:form id="modifProjet">
                             <div class="form-group row">
+                                <label for="Libelle" class="col-2 col-form-label">Libelle</label>
+                                <div class="col-5">
+                                    <h:inputText label="Libelle" id="libelle" class="form-control" value="#{projetsManageur.libelle}" size="50" required="true" />
+                                    <h:message for="libelle" errorClass="message-error" />                                    
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label for="date-start" class="col-2 col-form-label">Date de début</label>
                                 <div class="col-5">
-                                    <h:inputText id="date-start" class="form-control" value="#{projetsManageur.dateDebutProj}" size="20" required="true" >
-                                        <f:convertDateTime pattern="d/M/yyyy" />
+                                    <h:inputText label="La date de début" id="date-start" class="form-control" value="#{projetsManageur.dateDebutProj}" size="20" required="true" >
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
                                     </h:inputText>
+                                    <h:message for="date-start" errorClass="message-error" />                                    
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="date-end" class="col-2 col-form-label">Date de fin</label>
                                 <div class="col-5">
-                                    <h:inputText id="date-end" class="form-control" value="#{projetsManageur.dateFinProj}" size="20" required="false" >
-                                        <f:convertDateTime pattern="d/M/yyyy" />
+                                    <h:inputText label="La date de fin" id="date-end" class="form-control" value="#{projetsManageur.dateFinProj}" size="20" required="false" >
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
                                     </h:inputText>
+                                    <h:message for="date-end" errorClass="message-error" />
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -42,7 +51,6 @@
                                     </h:selectOneMenu>
                                 </div>
                             </div>
-                            
                             <h:commandButton value="Valider" type="submit" id="button" class="btn btn-outline-primary" action="#{projetsManageur.modifProjet()}" />
                         </h:form>
                         <div class="message">
