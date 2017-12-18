@@ -44,28 +44,23 @@ public class Utilisateurs implements Serializable {
     @Column(name = "idUtil")
     private int idUtil;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "nomUtil")
     private String nomUtil;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "prenomUtil")
     private String prenomUtil;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "telUtil")
     private String telUtil;
     @Id
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "mailUtil")
     private String mailUtil;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "mdpUtil")
     private String mdpUtil;

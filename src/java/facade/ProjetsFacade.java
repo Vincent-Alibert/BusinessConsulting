@@ -44,4 +44,12 @@ public class ProjetsFacade extends AbstractFacade<Projets> {
         }
         return projet;
     }
+    
+    public int nbrHeuresPassees(Projets currentProjet){
+        int heures;
+        Query query = em.createNamedQuery("Projets.heuresPassees", Projets.class);
+        query.setParameter("idProjet", currentProjet.getIdProjet());
+        heures = Integer.parseInt(query.getSingleResult().toString());
+        return heures;
+    }
 }

@@ -31,6 +31,7 @@ public class ProjetsManageur implements Serializable {
     private Date dateDebutProj;
     private Date dateFinProj;
     private int etatProjet;
+    private int heuresPassees;
     private Date dateOld;
     
     @EJB
@@ -97,14 +98,22 @@ public class ProjetsManageur implements Serializable {
     public void setEtatProjet(int etatProjet) {
         this.etatProjet = etatProjet;
     }
-
+    
     public Date getDateOld() {
         dateOld = new Date(0);
         return dateOld;
     }
-
+    
     public void setDateOld(Date dateOld) {
         this.dateOld = dateOld;
+    }
+    
+    public int getHeuresPassees() {
+        return heuresPassees;
+    }
+    
+    public void setHeuresPassees(int heuresPassees) {
+        this.heuresPassees = heuresPassees;
     }
     
     
@@ -117,7 +126,7 @@ public class ProjetsManageur implements Serializable {
                 etat = "En cours";
                 break;
             case 1:
-                etat = "Reussi";
+                etat = "Réussi";
                 break;
             case 2:
                 etat = "Echec";
@@ -169,5 +178,10 @@ public class ProjetsManageur implements Serializable {
             context.addMessage("modifProjet", message);
         }
         
+    }
+    
+    public int nbrHeuresPassees(){
+        heuresPassees = projetsFacade.nbrHeuresPassees(currentProjet);
+        return heuresPassees;
     }
 }

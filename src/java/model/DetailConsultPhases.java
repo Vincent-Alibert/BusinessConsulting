@@ -17,7 +17,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -38,18 +37,20 @@ public class DetailConsultPhases implements Serializable {
     @Basic(optional = false)
     @Column(name = "idDetailCOnsultPhase")
     private Integer idDetailCOnsultPhase;
+    
     @Basic(optional = false)
-    @NotNull
     @Column(name = "nbrHeures")
     private int nbrHeures;
+    
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 65535)
     @Column(name = "resume")
     private String resume;
+    
     @JoinColumn(name = "fk_idUtil", referencedColumnName = "idUtil")
     @ManyToOne(optional = false)
     private Utilisateurs fkidUtil;
+    
     @JoinColumn(name = "fk_idPhase", referencedColumnName = "idPhase")
     @ManyToOne(optional = false)
     private Phases fkidPhase;
