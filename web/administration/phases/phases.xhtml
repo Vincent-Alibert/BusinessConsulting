@@ -22,6 +22,9 @@
                 
                 <h:panelGroup rendered="#{not empty phasesManageur.currentPhase.libellePhase}">
                     <div class="row">
+                        <a class="btn btn-outline-primary" href="../projets/projets.xhtml?id=#{projetsManageur.currentProjet.idProjet}">Retourner sur le projet</a> 
+                    </div>
+                    <div class="row">
                         <div class="col-12" id="projet-libelle">
                             <h1>#{phasesManageur.currentPhase.libellePhase}</h1>
                         </div>                                                
@@ -64,9 +67,8 @@
                         <h:message for="supPhase" showSummary="true" showDetail="false"/>
                     </div>
                     <div class="row">
-                        <div class="col-12">
-                            <a class="btn btn-outline-primary" href="../projets/projets.xhtml?id=#{projetsManageur.currentProjet.idProjet}">Retourner sur le projet</a> 
-                            <a href="modifications-detail.xhtml" class="btn btn-outline-primary">Modifier des informations</a>
+                        <div class="col-12">                            
+                            <a href="modifications-phase.xhtml" class="btn btn-outline-primary">Modifications</a>
                         </div>
                     </div>
                 </h:panelGroup> 
