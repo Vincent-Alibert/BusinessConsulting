@@ -3,7 +3,8 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <f:metadata>
         <f:viewParam id="id" name="id" value="#{projetsManageur.idProjetRequest}" required="false" />
         <f:viewAction onPostback="true" action="#{projetsManageur.load(utilisateursManageur.currentUser)}" />
@@ -26,6 +27,12 @@
                         <div class="col-12" id="projet-libelle">
                             <h1>#{projetsManageur.currentProjet.libelleProj}</h1>
                         </div>
+                        <div id="projet-etat" class="col-12">
+                            <p>Etat du projet : #{projetsManageur.etatProjet()}</p>
+                        </div>
+                        <div id="projet-heure" class="col-12">
+                            <p>Nombre d'heure passées : #{projetsManageur.nbrHeuresPassees()}</p>
+                        </div>
                         <div class="col-12" id="projet-client">
                             <p>Client : M. #{projetsManageur.currentProjet.fkidClt.nomClient}</p>
                         </div>
@@ -45,9 +52,7 @@
                             </h:panelGroup>
                             
                         </div>
-                        <div id="projet-etat" class="col-12">
-                            <p>Etat du projet : #{projetsManageur.etatProjet()}</p>
-                        </div>
+                        
                     </div>
                     <div class="row">
                         <p  class="col-12">Phases du projet : </p>
@@ -72,7 +77,17 @@
                                                 <f:convertDateTime pattern="dd/MM/yyyy" />
                                             </h:outputText>
                                         </p>
-                                        <p>Intervenant : <ui:repeat value="#{itemPhase.detailConsultPhasesCollection}" var="itemConsultant">#{itemConsultant.fkidUtil.nomUtil} #{itemConsultant.fkidUtil.prenomUtil}</ui:repeat></p>                                        
+                                        <p>Intervenant : 
+                                            <ui:repeat rendered="#{itemPhase.detailConsultPhasesCollection.size() == 0}" value="#{itemPhase.detailConsultPhasesCollection}" var="itemConsultant">
+                                               Il y a pas d'intervant sur cette phase pour le moment.
+                                            </ui:repeat>
+                                            <ui:repeat rendered="#{itemPhase.detailConsultPhasesCollection.size() == 1}" value="#{itemPhase.detailConsultPhasesCollection}" var="itemConsultant">
+                                                #{itemConsultant.fkidUtil.nomUtil} #{itemConsultant.fkidUtil.prenomUtil}
+                                            </ui:repeat>
+                                            <ui:repeat rendered="#{itemPhase.detailConsultPhasesCollection.size() ge 1}" value="#{itemPhase.detailConsultPhasesCollection}" var="itemConsultant">
+                                                <span class="intervenant">#{itemConsultant.fkidUtil.nomUtil} #{itemConsultant.fkidUtil.prenomUtil}</span>                                               
+                                            </ui:repeat>
+                                        </p>                                        
                                     </a>
                                     <h:form id="supPhase" >
                                         <h:commandButton  value="Supprimer la phase" type="submit" id="button" class="btn btn-sm btn-outline-primary" action="#{phasesManageur.deletePhase(itemPhase.idPhase)}" >

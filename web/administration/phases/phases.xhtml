@@ -41,9 +41,6 @@
                             
                         </div>
                         <div id="projet-etat" class="col-12">
-                            <p>Etat du projet : #{projetsManageur.etatProjet()}</p>
-                        </div>
-                        <div id="projet-etat" class="col-12">
                             <p>Nombre d'heure passée : #{phasesManageur.nbreHeurePassee()}</p>
                         </div>
                     </div>
@@ -55,13 +52,10 @@
                         <ui:repeat value="#{phasesManageur.currentPhase.detailConsultPhasesCollection}" var="itemDetail">
                             <li class="col-6 col-md-4">
                                 <div class="card">
-                                    <a href="details.xhtml?id=#{itemDetail.idDetailCOnsultPhase}">
                                         <h3 class="card-title">Intervenant : #{itemDetail.fkidUtil.nomUtil} #{itemDetail.fkidUtil.prenomUtil}</h3>
                                         <p>nombre d'heure(s) : #{itemDetail.nbrHeures}</p>
                                         <p>Résumé : </p>
                                         <p>#{itemDetail.resume}</p>
-                                    </a>
-                                    
                                 </div>
                             </li>
                         </ui:repeat>

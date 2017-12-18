@@ -22,6 +22,11 @@
                                 <a href="projets/projets.xhtml?id=#{itemProject.idProjet}">
                                     <div class="card-block">
                                         <h2 class="card-title">#{itemProject.libelleProj}</h2>
+                                        <p class="card-text">Etat du projet : 
+                                            <h:panelGroup rendered="#{itemProject.etatFinal == 0}">En cours</h:panelGroup>
+                                            <h:panelGroup rendered="#{itemProject.etatFinal == 1}">Réussi</h:panelGroup>
+                                            <h:panelGroup rendered="#{itemProject.etatFinal == 2}">Echec</h:panelGroup>
+                                        </p>
                                         <p class="card-text">Projet débuté le : <h:outputText value="#{itemProject.dateDebutProj}">
                                                 <f:convertDateTime pattern="dd/MM/yyyy" />
                                             </h:outputText></p>

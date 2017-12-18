@@ -38,13 +38,14 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Projets.findByMontantProj", query = "SELECT p FROM Projets p WHERE p.montantProj = :montantProj"),
     @NamedQuery(name = "Projets.findByDateDebutProj", query = "SELECT p FROM Projets p WHERE p.dateDebutProj = :dateDebutProj"),
     @NamedQuery(name = "Projets.findByDateFinProj", query = "SELECT p FROM Projets p WHERE p.dateFinProj = :dateFinProj"),
-    @NamedQuery(name = "Projets.findByEtatFinal", query = "SELECT p FROM Projets p WHERE p.etatFinal = :etatFinal")})
+    @NamedQuery(name = "Projets.findByEtatFinal", query = "SELECT p FROM Projets p WHERE p.etatFinal = :etatFinal"),
+    @NamedQuery(name = "Projets.heuresPassees", query = "SELECT SUM(d.nbrHeures) FROM DetailConsultPhases AS d  JOIN Phases AS ph  JOIN Projets AS pr WHERE (d.fkidPhase.idPhase = ph.idPhase) AND (ph.fkidProjet.idProjet = pr.idProjet) AND (pr.idProjet = :idProjet) GROUP BY pr.idProjet")
+})
 public class Projets implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
     @Column(name = "idProjet")
     private Integer idProjet;    
     
