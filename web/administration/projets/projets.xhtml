@@ -72,11 +72,12 @@
                                                 <f:convertDateTime pattern="dd/MM/yyyy" />
                                             </h:outputText>
                                         </p> 
-                                        
-                                        <p class="item-phases-date-fin card-text">Date de fin de la phase : <h:outputText value="#{itemPhase.dateFinPhase}">
-                                                <f:convertDateTime pattern="dd/MM/yyyy" />
-                                            </h:outputText>
-                                        </p>
+                                        <h:panelGroup rendered="#{itemPhase.dateFinPhase.after(projetsManageur.dateOld)}">
+                                           <p class="item-phases-date-fin card-text">Date de fin de la phase : <h:outputText value="#{itemPhase.dateFinPhase}">
+                                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                                </h:outputText>
+                                            </p> 
+                                        </h:panelGroup>                                        
                                         <p>Nombre d'intervention : #{itemPhase.detailConsultPhasesCollection.size()}</p>                                        
                                     </a>
                                     <h:form id="supPhase" >
