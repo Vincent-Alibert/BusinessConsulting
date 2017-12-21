@@ -198,7 +198,6 @@ public class PhasesManageur implements Serializable {
             listPhases.add(currentPhase);
             dateDebut= currentPhase.getDateDebutPhase();
             dateFin = currentPhase.getDateFinPhase();
-            
         } catch(NumberFormatException e) {
             currentPhase = new Phases();
         }
@@ -226,7 +225,11 @@ public class PhasesManageur implements Serializable {
     
     public int nbreHeurePassee (){
         int nbreHeure;
-        nbreHeure = phasesFacade.nbreHeurePassee(currentPhase);
+        try{
+            nbreHeure = phasesFacade.nbreHeurePassee(currentPhase);
+        }catch (Exception e) {
+            nbreHeure =0;
+        }
         return nbreHeure;
     }
     
@@ -240,7 +243,7 @@ public class PhasesManageur implements Serializable {
                 currentPhase.setDateFinPhase(dateFin);
                 phasesFacade.edit(currentPhase);
                 dateDebut = null;
-                dateFin = null;                
+                dateFin = null;
                 FacesContext context = FacesContext.getCurrentInstance();
                 FacesMessage message = new FacesMessage();
                 message.setSeverity(FacesMessage.SEVERITY_INFO);

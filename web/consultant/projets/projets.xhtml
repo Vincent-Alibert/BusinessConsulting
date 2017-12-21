@@ -6,8 +6,8 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <f:metadata>
-        <f:viewParam id="id" name="id" value="#{projetsManageur.idProjetRequest}" required="false" />
-        <f:viewAction onPostback="true" action="#{projetsManageur.load(utilisateursManageur.currentUser)}" />
+        <f:viewParam id="id" name="id" value="#{projetsManageur.idProjetRequest}" required="true" />
+        <f:viewAction onPostback="true" action="#{projetsManageur.loadOne()}" />
     </f:metadata>
     <ui:define name="content-main">  
         <section id="projet">
@@ -71,33 +71,21 @@
                                             <h:outputText value="#{itemPhase.dateDebutPhase}">
                                                 <f:convertDateTime pattern="dd/MM/yyyy" />
                                             </h:outputText>
-                                        </p> 
+                                        </p>                                        
                                         <h:panelGroup rendered="#{itemPhase.dateFinPhase.after(projetsManageur.dateOld)}">
                                            <p class="item-phases-date-fin card-text">Date de fin de la phase : <h:outputText value="#{itemPhase.dateFinPhase}">
                                                     <f:convertDateTime pattern="dd/MM/yyyy" />
                                                 </h:outputText>
                                             </p> 
-                                        </h:panelGroup>                                        
+                                        </h:panelGroup>
                                         <p>Nombre d'intervention : #{itemPhase.detailConsultPhasesCollection.size()}</p>                                        
                                     </a>
-                                    <h:form id="supPhase" >
-                                        <h:commandButton  value="Supprimer la phase" type="submit" id="button" class="btn btn-sm btn-outline-primary" action="#{phasesManageur.deletePhase(itemPhase.idPhase)}" >
-                                            <f:param name="idProjetRequest" value="#{projetsManageur.currentProjet.idProjet}" />
-                                        </h:commandButton>
-                                    </h:form>
+                                    
                                 </div>
                             </li>
                         </ui:repeat>
                     </ul> 
-                    <div class="col-12 message">
-                        <h:message for="supPhase" showSummary="true" showDetail="false"/>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <a href="modifications.xhtml" class="btn btn-outline-primary">Modifier des informations</a>
-                            <h:panelGroup rendered="#{projetsManageur.currentProjet.etatFinal == 0}" ><a href="../phases/ajout-phase.xhtml" class="btn btn-outline-primary">Ajouter une nouvelle phase</a></h:panelGroup>
-                        </div>
-                    </div>
+                    
                 </h:panelGroup>                
             </div>
         </section>
