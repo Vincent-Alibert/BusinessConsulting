@@ -1,0 +1,82 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <ui:define name="content-main">
+        <c:if test="#{empty utilisateursManageur.currentUser.idUtil or utilisateursManageur.idPoste != 2} " >
+            <div class="container">
+                <div class="row">
+                    <h2 class="col-12">Bonjour, vous n'avez pas accés ce dossier. Veuillez vous connecter ou retourner sur la page d'accueil</h2>
+                    <a class="col-12" href="../index.xhtml">Retour sur la page d'accueil</a>
+                </div>
+            </div>
+        </c:if>
+        <c:if test="#{not empty utilisateursManageur.currentUser.idUtil and utilisateursManageur.idPoste == 2}" >
+            <section class="compte-accueil">
+                <div class="container">
+                    <div class="row">
+                        <h1 class="col-12">Bonjour #{utilisateursManageur.currentUser.prenomUtil}</h1>
+                        <p class="col-12">Il y a actuellement #{projetsManageur.projetsFacade.findByEtat(0).size()} projet<h:panelGroup rendered="#{projetsManageur.projetsFacade.findByEtat(0).size() lt 1}">s</h:panelGroup> de disponible</p>
+                    </div>
+                </div>
+            </section>
+            
+            <c:if test="#{projetsManageur.projetsFacade.findByEtat(0).size() gt 0}">
+              
+                <section class="compte-project">
+                    <div class="container">
+                        <ul class="row">
+                            <ui:repeat value="#{projetsManageur.projetsFacade.findByEtat(0)}" var="itemProject" >
+                                <li class="col-6 col-md-4">
+                                    <div class="card">
+                                        <a href="projets/projets.xhtml?id=#{itemProject.idProjet}">
+                                            <div class="card-block">
+                                                <h2 class="card-title">#{itemProject.libelleProj}</h2>
+                                                <p class="card-text">Etat du projet : 
+                                                    <h:panelGroup rendered="#{itemProject.etatFinal == 0}">En cours</h:panelGroup>
+                                                    <h:panelGroup rendered="#{itemProject.etatFinal == 1}">Réussi</h:panelGroup>
+                                                    <h:panelGroup rendered="#{itemProject.etatFinal == 2}">Echec</h:panelGroup>
+                                                </p>
+                                                <p class="card-text">Débuté le : <h:outputText value="#{itemProject.dateDebutProj}">
+                                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                                    </h:outputText></p>
+                                                <h:panelGroup rendered="#{projetsManageur.currentProjet.dateFinProj.after(projetsManageur.dateOld)}">
+                                                    <p id="projet-date-fin">Fini le :  
+                                                        <h:outputText value="#{projetsManageur.currentProjet.dateFinProj}">
+                                                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                                                        </h:outputText>
+                                                    </p>
+                                                </h:panelGroup>
+                                                
+                                                <p class="card-text">Phases : </p>
+                                                <ul class="list-group list-group-flush " >
+                                                    <ui:repeat value="#{itemProject.phasesCollection}" var="itemPhase" >
+                                                        <li class="list-group-item">#{itemPhase.libellePhase}</li>
+                                                    </ui:repeat>   
+                                                </ul>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ui:repeat>
+                        </ul>
+                    </div>
+                </section>
+            </c:if>
+            <c:if test="#{projetsManageur.projetsFacade.findByEtat(0).size() == 0}">
+                <section class="compte-project">
+                    <div class="container">
+                        <ul class="row">
+                            <div class="col-12">
+                                <p>Il n'y a aucun projet en cours actuellement.</p>
+                            </div>
+                        </ul>
+                    </div>
+                </section>
+            </c:if>
+        </c:if>
+    </ui:define>
+</ui:composition>

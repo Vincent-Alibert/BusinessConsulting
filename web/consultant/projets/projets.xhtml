@@ -1,0 +1,93 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <f:metadata>
+        <f:viewParam id="id" name="id" value="#{projetsManageur.idProjetRequest}" required="true" />
+        <f:viewAction onPostback="true" action="#{projetsManageur.loadOne()}" />
+    </f:metadata>
+    <ui:define name="content-main">  
+        <section id="projet">
+            <div class="container">
+                
+                <h:panelGroup rendered="#{empty projetsManageur.currentProjet.idProjet}">
+                    <div class="row">
+                        <div class="col">
+                            <h2>Bonjour, il semblerait que ce projet n'existe pas ou que vous n'ayez pas les droits d'accès à ce projet.</h2>
+                            <a href="../compte.xhtml">Retour sur la page compte</a>
+                        </div>
+                    </div>
+                </h:panelGroup>
+                
+                <h:panelGroup rendered="#{not empty projetsManageur.currentProjet.idProjet}">
+                    <div class="row">
+                        <div class="col-12" id="projet-libelle">
+                            <h1>#{projetsManageur.currentProjet.libelleProj}</h1>
+                        </div>
+                        <div id="projet-etat" class="col-12">
+                            <p>Etat du projet : #{projetsManageur.etatProjet()}</p>
+                        </div>
+                        <div id="projet-heure" class="col-12">
+                            <p>Nombre d'heure passées : #{projetsManageur.nbrHeuresPassees()}</p>
+                        </div>
+                        <div class="col-12" id="projet-client">
+                            <p>Client : M. #{projetsManageur.currentProjet.fkidClt.nomClient}</p>
+                        </div>
+                        
+                        <div id="projet-date" class="col-12">
+                            <p id="projet-date-debut">Débuté le : 
+                                <h:outputText value="#{projetsManageur.currentProjet.dateDebutProj}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </h:outputText>
+                            </p>
+                            <h:panelGroup rendered="#{projetsManageur.currentProjet.dateFinProj.after(projetsManageur.dateOld)}">
+                                <p id="projet-date-fin">Date de fin du projet :  
+                                    <h:outputText value="#{projetsManageur.currentProjet.dateFinProj}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </h:outputText>
+                                </p>
+                            </h:panelGroup>
+                            
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <p  class="col-12">Phases du projet : </p>
+                        
+                    </div>  
+                    <ul class="row">
+                        <ui:repeat value="#{projetsManageur.currentProjet.phasesCollection}" var="itemPhase">
+                            <li class="col-6 col-md-4">
+                                <div class="card">
+                                    <a href="../phases/phases.xhtml?id=#{itemPhase.idPhase}">
+                                        <h2 class="card-title">#{itemPhase.libellePhase}</h2>
+                                        <ui:repeat value="#{itemPhase.secteursCollection}" var="itemSecteur">
+                                            <p class="card-text">Secteur : #{itemSecteur.libelleSecteur}</p>
+                                        </ui:repeat>
+                                        <p class="item-phases-date-debut card-text">Date de Début de la phase : 
+                                            <h:outputText value="#{itemPhase.dateDebutPhase}">
+                                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                                            </h:outputText>
+                                        </p>                                        
+                                        <h:panelGroup rendered="#{itemPhase.dateFinPhase.after(projetsManageur.dateOld)}">
+                                           <p class="item-phases-date-fin card-text">Date de fin de la phase : <h:outputText value="#{itemPhase.dateFinPhase}">
+                                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                                </h:outputText>
+                                            </p> 
+                                        </h:panelGroup>
+                                        <p>Nombre d'intervention : #{itemPhase.detailConsultPhasesCollection.size()}</p>                                        
+                                    </a>
+                                    
+                                </div>
+                            </li>
+                        </ui:repeat>
+                    </ul> 
+                    
+                </h:panelGroup>                
+            </div>
+        </section>
+    </ui:define>
+</ui:composition>
