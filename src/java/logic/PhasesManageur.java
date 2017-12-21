@@ -189,7 +189,7 @@ public class PhasesManageur implements Serializable {
         }
         return "";
     }
-    
+        
     public void load(Projets currentProjet){
         try{
             setIdPhase(Integer.parseInt(IdPhaseRequest));
@@ -197,7 +197,12 @@ public class PhasesManageur implements Serializable {
             listPhases = new ArrayList();
             listPhases.add(currentPhase);
             dateDebut= currentPhase.getDateDebutPhase();
-            dateFin = currentPhase.getDateFinPhase();
+            if(currentPhase.getDateFinPhase().after(new Date(0))){
+                dateFin = currentPhase.getDateFinPhase();
+            } else {
+                dateFin = null;
+            }
+            
         } catch(NumberFormatException e) {
             currentPhase = new Phases();
         }
@@ -239,6 +244,11 @@ public class PhasesManageur implements Serializable {
                 if(dateFin == null){
                     dateFin = new Date(0);
                 }
+                currentSecteur = secteursFacade.findOneById(secteurChoise);
+                listSecteurs = new ArrayList();
+                listSecteurs.add(currentSecteur);
+                currentPhase.setSecteursCollection(listSecteurs);
+                
                 currentPhase.setDateDebutPhase(dateDebut);
                 currentPhase.setDateFinPhase(dateFin);
                 phasesFacade.edit(currentPhase);
