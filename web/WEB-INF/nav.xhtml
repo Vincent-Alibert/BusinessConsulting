@@ -20,15 +20,15 @@
                 </ul>
                 <c:if test="#{view.viewId != '/login.xhtml'}">
                     <h:form id="formConnection" class="form-inline my-2 my-lg-0">
-                    <div class="form-group">
-                        <h:inputText class="form-control mr-sm-2" id="mailUtil" value="#{utilisateursManageur.mailUtil}" a:placeholder="Email">
-                            <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-                        </h:inputText>                       
-                        <h:inputSecret class="form-control mr-sm-2" id="mdpUtil" value="#{utilisateursManageur.mdpUtil}" a:placeholder="Password" />
-                        <h:commandButton value="Valider" type="submit" class="btn btn-outline-primary my-2 my-sm-0" action="#{utilisateursManageur.login()}" /> 
-                    </div>
-                    <h:message class="nav-item" for="formConnection" showSummary="true" showDetail="false" />
-                </h:form>
+                        <div class="form-group">
+                            <h:inputText class="form-control mr-sm-2" id="mailUtil" value="#{utilisateursManageur.mailUtil}" a:placeholder="Email">
+                                <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                            </h:inputText>                       
+                            <h:inputSecret class="form-control mr-sm-2" id="mdpUtil" value="#{utilisateursManageur.mdpUtil}" a:placeholder="Password" />
+                            <h:commandButton value="Valider" type="submit" class="btn btn-outline-primary my-2 my-sm-0" action="#{utilisateursManageur.login()}" /> 
+                        </div>
+                        <h:message class="nav-item" for="formConnection" showSummary="true" showDetail="false" />
+                    </h:form>
                 </c:if>
                 
             </div>
@@ -41,9 +41,16 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="/BusinessConsulting/faces/index.xhtml">Accueil</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/BusinessConsulting/faces/administration/compte.xhtml">Mon compte</a>
-                    </li>
+                    <ui:repeat value="#{utilisateursManageur.currentUser.postesCollection}" var="itemPoste" >
+                        <li class="nav-item">
+                            <h:panelGroup rendered="#{itemPoste.idPoste == 1}">
+                                <a class="nav-link" href="/BusinessConsulting/faces/administration/compte.xhtml">Mon compte</a>
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{itemPoste.idPoste == 2}">
+                                <a class="nav-link" href="/BusinessConsulting/faces/consultant/compte.xhtml">Mon compte</a>
+                            </h:panelGroup>
+                        </li>
+                    </ui:repeat>
                 </ul>
                 <p class="nav-item">#{utilisateursManageur.currentUser.nomUtil}</p>
                 <h:form id="formDeconnection" class="form-inline my-2 my-lg-0">

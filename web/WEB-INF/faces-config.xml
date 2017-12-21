@@ -15,5 +15,10 @@
             <to-view-id>/index.xhtml</to-view-id>
             <redirect />
         </navigation-case>
+        <navigation-case>
+            <from-outcome>toConsultCompteFromLogin</from-outcome>
+            <to-view-id>/consultant/compte.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
     </navigation-rule>
 </faces-config>
