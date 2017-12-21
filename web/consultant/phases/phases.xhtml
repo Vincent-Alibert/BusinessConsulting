@@ -28,7 +28,14 @@
                     <div class="row">
                         <div class="col-12" id="projet-libelle">
                             <h1>#{phasesManageur.currentPhase.libellePhase}</h1>
-                        </div>                                                
+                        </div> 
+                        <div id="projet-phase" class="col-12">
+                            <p>Secteur :
+                                <ui:repeat value="#{phasesManageur.currentPhase.secteursCollection}" var="itemSecteur">
+                                    #{itemSecteur.libelleSecteur}
+                            </ui:repeat>
+                                </p>
+                        </div>
                         <div id="projet-date" class="col-12">
                             <p id="projet-date-debut">Débuté le : 
                                 <h:outputText value="#{phasesManageur.currentPhase.dateDebutPhase}">

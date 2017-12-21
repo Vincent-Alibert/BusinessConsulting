@@ -15,7 +15,15 @@
                     <div class="col-12">
                         <h:form id="modifPhase">
                             <div class="form-group row">
-                                <label for="date-start" class="col-2 col-form-label">Date de début</label>
+                                <label for='secteur' class="col-3 col-form-label">Secteur de la phase :</label>
+                                <div class="col-3">
+                                    <h:selectOneMenu label="secteurs" class="form-control" id="secteur" value="#{phasesManageur.secteurChoise}" >
+                                        <f:selectItems value="#{secteursManageur.listSecteur}" var="c" itemLabel="#{c.libelleSecteur}" itemValue="#{c.idSecteur}" />
+                                    </h:selectOneMenu>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="date-start" class="col-2 col-form-label">Date de début :</label>
                                 <div class="col-5">
                                     <h:inputText label="La date de début" id="date-start" class="form-control" value="#{phasesManageur.dateDebut}" size="20" required="true" >
                                         <f:convertDateTime pattern="dd/MM/yyyy" />
@@ -24,7 +32,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="date-end" class="col-2 col-form-label">Date de fin</label>
+                                <label for="date-end" class="col-2 col-form-label">Date de fin :</label>
                                 <div class="col-5">
                                     <h:inputText label="La date de fin" id="date-end" class="form-control" value="#{phasesManageur.dateFin}" size="20" required="false" >
                                         <f:convertDateTime pattern="dd/MM/yyyy" />

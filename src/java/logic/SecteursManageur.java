@@ -58,7 +58,6 @@ public class SecteursManageur implements Serializable {
         this.listSecteur = listSecteur;
     }
     
-    
     @PostConstruct
     public void initSecteur(){
         listSecteur = new ArrayList();
