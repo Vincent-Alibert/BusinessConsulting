@@ -157,7 +157,15 @@ public class ProjetsManageur implements Serializable {
             currentProjet = new Projets();
         }
     }
-    
+    public void loadOne(){
+        try{
+            idProjet = Integer.parseInt(idProjetRequest);
+            System.out.println("id = " + idProjet);
+            currentProjet = projetsFacade.find(idProjet);
+        } catch(NumberFormatException e) {
+            currentProjet = new Projets();
+        }
+    }
     public void modifProjet(){
         try{
             if(dateFinProj == null || dateDebutProj.before(dateFinProj)){
@@ -194,7 +202,12 @@ public class ProjetsManageur implements Serializable {
     }
     
     public int nbrHeuresPassees(){
-        heuresPassees = projetsFacade.nbrHeuresPassees(currentProjet);
+        try{
+            heuresPassees = projetsFacade.nbrHeuresPassees(currentProjet);
+        }
+        catch (Exception e) {
+            heuresPassees =0;
+        }
         return heuresPassees;
     }
 }

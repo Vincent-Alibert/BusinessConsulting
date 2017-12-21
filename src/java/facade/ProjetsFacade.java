@@ -5,6 +5,7 @@
 */
 package facade;
 
+import java.util.ArrayList;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -51,5 +52,17 @@ public class ProjetsFacade extends AbstractFacade<Projets> {
         query.setParameter("idProjet", currentProjet.getIdProjet());
         heures = Integer.parseInt(query.getSingleResult().toString());
         return heures;
+    }
+    public ArrayList<Projets> findByEtat(int etat){
+        ArrayList<Projets> listProjet;        
+        try {
+            Query query = em.createNamedQuery("Projets.findByEtatFinal", Projets.class);
+            query.setHint("javax.persistence.cache.storeMode", "REFRESH");
+            query.setParameter("etatFinal", etat);
+            listProjet = new ArrayList(query.getResultList()) ;
+        } catch (Exception e) {
+            listProjet = new ArrayList();
+        }
+        return listProjet;
     }
 }

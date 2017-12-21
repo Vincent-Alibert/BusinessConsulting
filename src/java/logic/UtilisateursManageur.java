@@ -14,6 +14,7 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+import model.Postes;
 import model.Utilisateurs;
 
 /**
@@ -26,6 +27,7 @@ public class UtilisateursManageur implements Serializable {
     
     private String mailUtil;
     private String mdpUtil;
+    private int idPoste;
     private Utilisateurs currentUser;
     private ArrayList<Utilisateurs> listUser;
     
@@ -77,11 +79,24 @@ public class UtilisateursManageur implements Serializable {
     public void setListUser(ArrayList<Utilisateurs> listUser) {
         this.listUser = listUser;
     }
+    
+    public int getIdPoste() {
+        return idPoste;
+    }
+    
+    public void setIdPoste(int idPoste) {
+        this.idPoste = idPoste;
+    }
+    
+    
+    /*méthode*/
     public String logout() throws IOException {
         
         /* Récupération et destruction de la session en cours */
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+        session.setAttribute("currentUserId", null );
+        session.setAttribute("currentUserNom", null);
         session.invalidate();
         return "toIndexFromAll";
     }
@@ -95,6 +110,19 @@ public class UtilisateursManageur implements Serializable {
             HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
             session.setAttribute("currentUserId", currentUser.getIdUtil());
             session.setAttribute("currentUserNom", currentUser.getNomUtil());
+            for (Postes postes : currentUser.getPostesCollection()) {
+                idPoste = postes.getIdPoste();
+                if(null != postes.getIdPoste())switch (postes.getIdPoste()) {
+                    case 1:
+                        return "toCompteFromLogin";
+                    case 2:
+                        return "toConsultCompteFromLogin";
+                    case 3:
+                        return "";
+                    default:
+                        break;
+                }
+            }
             return "toCompteFromLogin";
         }
         FacesContext context = FacesContext.getCurrentInstance();
