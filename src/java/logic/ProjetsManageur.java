@@ -9,7 +9,9 @@ import facade.ProjetsFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -32,6 +34,7 @@ public class ProjetsManageur implements Serializable {
     private int etatProjet;
     private int heuresPassees;
     private Date dateOld;
+    private SimpleDateFormat dateFormat;
     
     @EJB
             ProjetsFacade projetsFacade;
@@ -107,7 +110,6 @@ public class ProjetsManageur implements Serializable {
     }
     
     public Date getDateOld() {
-        dateOld = new Date(0);
         return dateOld;
     }
     
@@ -150,7 +152,9 @@ public class ProjetsManageur implements Serializable {
             setIdProjet(Integer.parseInt(idProjetRequest));
             currentProjet = projetsFacade.findByIdAndUser(idProjet, currentUser);
             dateDebutProj = currentProjet.getDateDebutProj();
-            dateFinProj = currentProjet.getDateFinProj();
+            // condition ternaire pour la dateFinProj;
+            dateFinProj = ( dateFormat.format(dateOld).equals(dateFormat.format(currentProjet.getDateFinProj())) )? null : currentProjet.getDateFinProj();
+            
             etatProjet = currentProjet.getEtatFinal();
             libelle = currentProjet.getLibelleProj();
         } catch(NumberFormatException e) {
@@ -208,5 +212,10 @@ public class ProjetsManageur implements Serializable {
             heuresPassees =0;
         }
         return heuresPassees;
+    }
+    @PostConstruct
+    private void init(){
+        dateFormat = new SimpleDateFormat("dd-MM-yy");
+        dateOld = new Date(0);
     }
 }

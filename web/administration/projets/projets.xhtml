@@ -13,16 +13,16 @@
         <section id="projet">
             <div class="container">
                 
-                <h:panelGroup rendered="#{empty projetsManageur.currentProjet.idProjet}">
+                <c:if test="#{empty projetsManageur.currentProjet.idProjet}">
                     <div class="row">
                         <div class="col">
                             <h2>Bonjour, il semblerait que ce projet n'existe pas ou que vous n'ayez pas les droits d'accès à ce projet.</h2>
                             <a href="../compte.xhtml">Retour sur la page compte</a>
                         </div>
                     </div>
-                </h:panelGroup>
+                </c:if>
                 
-                <h:panelGroup rendered="#{not empty projetsManageur.currentProjet.idProjet}">
+                 <c:if test="#{not empty projetsManageur.currentProjet.idProjet}">
                     <div class="row">
                         <div class="col-12" id="projet-libelle">
                             <h1>#{projetsManageur.currentProjet.libelleProj}</h1>
@@ -98,7 +98,7 @@
                             <h:panelGroup rendered="#{projetsManageur.currentProjet.etatFinal == 0}" ><a href="../phases/ajout-phase.xhtml" class="btn btn-outline-primary">Ajouter une nouvelle phase</a></h:panelGroup>
                         </div>
                     </div>
-                </h:panelGroup>                
+                </c:if>               
             </div>
         </section>
     </ui:define>
