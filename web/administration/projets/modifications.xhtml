@@ -8,6 +8,12 @@
     <ui:define name="content-main">
         <section id="projet-modification">
             <div class="container">
+                <c:if test="#{not projetsManageur.currentProjet.fkidChefProj.equals(utilisateursManageur.currentUser)}">
+                    <div class="row">
+                        <h2 class="col-12">Bonjour, il semblerait que vous n'ayez pas accés à cette page.</h2> 
+                        <a class="col-12" href="../../index.xhtml">Retour sur la page d'accueil</a>
+                    </div>
+                </c:if>
                 <c:if test="#{projetsManageur.currentProjet.fkidChefProj.equals(utilisateursManageur.currentUser)}">
                     <div class="row">
                         <div class="col-12">
@@ -62,12 +68,6 @@
                     </div>
                     <div class="return row">
                         <a class="btn btn-outline-primary" href="projets.xhtml?id=#{projetsManageur.currentProjet.idProjet}">Retourner sur le projet</a>
-                    </div>
-                </c:if>
-                <c:if test="#{not projetsManageur.currentProjet.fkidChefProj.equals(utilisateursManageur.currentUser)}">
-                    <div class="row">
-                        <h2 class="col-12">Bonjour, il semblerait que vous n'ayez pas accés à cette page.</h2> 
-                        <a class="col-12" href="../../index.xhtml">Retour sur la page d'accueil</a>
                     </div>
                 </c:if>
             </div> 

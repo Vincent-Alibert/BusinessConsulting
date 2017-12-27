@@ -2,75 +2,83 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">     
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">     
     <ui:define name="content-main">
         <section id="phase-ajout">
             <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <h1>Ajout d'une phase au projet #{projetsManageur.currentProjet.libelleProj}</h1>
+                <c:if test="#{not phasesManageur.currentPhase.fkidProjet.fkidChefProj.equals(utilisateursManageur.currentUser)}">
+                    <div class="row">
+                        <h2 class="col-12">Bonjour, vous n'avez pas accés ce dossier. Veuillez vous connecter ou retourner sur la page d'accueil</h2>
+                        <a class="col-12" href="../index.xhtml">Retour sur la page d'accueil</a>
                     </div>
-                    <div class="col-12">
-                        <h:form id="ajoutPhase">
-                            <div class="form-group row">
-                                <label for='secteur' class="col-3 col-form-label">Secteur de la phase</label>
-                                <div class="col-3">
-                                    <h:selectOneMenu class="form-control" id="secteur" value="#{phasesManageur.secteurChoise}" >
-                                        <f:selectItems value="#{secteursManageur.listSecteur}" var="c" itemLabel="#{c.libelleSecteur}" itemValue="#{c.idSecteur}" />
-                                    </h:selectOneMenu>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="libelle" class="col-3 col-form-label">Libelle de la phase : </label>
-                                <div class="col-5">
-                                    <h:inputText required="true" class="form-control" value="#{phasesManageur.libelle}" id="libelle" />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="montant" class="col-3 col-form-label">Montant de la phase : </label>
-                                <div class="col-5">
-                                    <h:inputText required="true" label="Cette saisie" class="form-control" value="#{phasesManageur.montant}" id="montant" >
-                                        <f:convertNumber type="number" />
-                                    </h:inputText>
-                                    <h:message styleClass="message-error" for="montant" />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="date-start" class="col-3 col-form-label">Date de début</label>
-                                <div class="col-5">
-                                    <h:inputText required="true" label="Cette saisie" id="date-start" class="form-control" value="#{phasesManageur.dateDebut}">  
-                                        <f:convertDateTime pattern="dd/MM/yyyy" />  
-                                    </h:inputText>
-                                    <h:message styleClass="message-error" for="date-start" />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="date-end" class="col-3 col-form-label">Date de fin</label>
-                                <div class="col-5">
-                                    <h:inputText label="Cette saisie" id="date-end" class="form-control" value="#{phasesManageur.dateFin}">  
-                                        <f:convertDateTime pattern="dd/MM/yyyy" />  
-                                    </h:inputText>
-                                    <h:message  styleClass="message-error" for="date-end" />
-                                </div>
-                            </div>  
-                            <div class="form-group row">
-                                <label for="etat" class="col-3 col-form-label">Etat d'avancement de la phase : </label>
-                                <div class="col-5">
-                                    <h:inputText required="true" class="form-control" value="#{phasesManageur.etatAvancement}" id="etatAvancement" >
-                                        <f:convertNumber type="number" />
-                                    </h:inputText>
-                                </div>
-                            </div>
-                            <h:commandButton value="Valider" type="submit" id="button" class="btn btn-outline-primary" action="#{phasesManageur.addPhase(projetsManageur.currentProjet)}" />
-                        </h:form>
-                        <div class="message">
-                            <h:message for="ajoutPhase" showSummary="true" showDetail="false"/>
+                </c:if>
+                <c:if test="#{phasesManageur.currentPhase.fkidProjet.fkidChefProj.equals(utilisateursManageur.currentUser)}">
+                    <div class="row">
+                        <div class="col-12">
+                            <h1>Ajout d'une phase au projet #{projetsManageur.currentProjet.libelleProj}</h1>
                         </div>
-                        
-                        <a class="btn btn-outline-primary" href="../projets/projets.xhtml?id=#{projetsManageur.currentProjet.idProjet}">Retourner sur le projet</a>
+                        <div class="col-12">
+                            <h:form id="ajoutPhase">
+                                <div class="form-group row">
+                                    <label for='secteur' class="col-3 col-form-label">Secteur de la phase</label>
+                                    <div class="col-3">
+                                        <h:selectOneMenu class="form-control" id="secteur" value="#{phasesManageur.secteurChoise}" >
+                                            <f:selectItems value="#{secteursManageur.listSecteur}" var="c" itemLabel="#{c.libelleSecteur}" itemValue="#{c.idSecteur}" />
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="libelle" class="col-3 col-form-label">Libelle de la phase : </label>
+                                    <div class="col-5">
+                                        <h:inputText required="true" class="form-control" value="#{phasesManageur.libelle}" id="libelle" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="montant" class="col-3 col-form-label">Montant de la phase : </label>
+                                    <div class="col-5">
+                                        <h:inputText required="true" label="Cette saisie" class="form-control" value="#{phasesManageur.montant}" id="montant" >
+                                            <f:convertNumber type="number" />
+                                        </h:inputText>
+                                        <h:message styleClass="message-error" for="montant" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="date-start" class="col-3 col-form-label">Date de début</label>
+                                    <div class="col-5">
+                                        <h:inputText required="true" label="Cette saisie" id="date-start" class="form-control" value="#{phasesManageur.dateDebut}">  
+                                            <f:convertDateTime pattern="dd/MM/yyyy" />  
+                                        </h:inputText>
+                                        <h:message styleClass="message-error" for="date-start" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="date-end" class="col-3 col-form-label">Date de fin</label>
+                                    <div class="col-5">
+                                        <h:inputText label="Cette saisie" id="date-end" class="form-control" value="#{phasesManageur.dateFin}">  
+                                            <f:convertDateTime pattern="dd/MM/yyyy" />  
+                                        </h:inputText>
+                                        <h:message  styleClass="message-error" for="date-end" />
+                                    </div>
+                                </div>  
+                                <div class="form-group row">
+                                    <label for="etat" class="col-3 col-form-label">Etat d'avancement de la phase : </label>
+                                    <div class="col-5">
+                                        <h:inputText required="true" class="form-control" value="#{phasesManageur.etatAvancement}" id="etatAvancement" >
+                                            <f:convertNumber type="number" />
+                                        </h:inputText>
+                                    </div>
+                                </div>
+                                <h:commandButton value="Valider" type="submit" id="button" class="btn btn-outline-primary" action="#{phasesManageur.addPhase(projetsManageur.currentProjet)}" />
+                            </h:form>
+                            <div class="message">
+                                <h:message for="ajoutPhase" showSummary="true" showDetail="false"/>
+                            </div>
+                            
+                            <a class="btn btn-outline-primary" href="../projets/projets.xhtml?id=#{projetsManageur.currentProjet.idProjet}">Retourner sur le projet</a>
+                        </div>
                     </div>
-                </div>
+                </c:if>
             </div> 
         </section>
     </ui:define>
