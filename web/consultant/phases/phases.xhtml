@@ -33,8 +33,8 @@
                             <p>Secteur :
                                 <ui:repeat value="#{phasesManageur.currentPhase.secteursCollection}" var="itemSecteur">
                                     #{itemSecteur.libelleSecteur}
-                            </ui:repeat>
-                                </p>
+                                </ui:repeat>
+                            </p>
                         </div>
                         <div id="projet-date" class="col-12">
                             <p id="projet-date-debut">Débuté le : 
@@ -63,20 +63,24 @@
                         <ui:repeat value="#{phasesManageur.currentPhase.detailConsultPhasesCollection}" var="itemDetail">
                             <li class="col-6 col-md-4">
                                 <div class="card">
-                                        <h3 class="card-title">Intervenant : #{itemDetail.fkidUtil.nomUtil} #{itemDetail.fkidUtil.prenomUtil}</h3>
-                                        <p>nombre d'heure(s) : #{itemDetail.nbrHeures}</p>
-                                        <p>Résumé : </p>
-                                        <p>#{itemDetail.resume}</p>
+                                    <h3 class="card-title">Intervenant : #{itemDetail.fkidUtil.nomUtil} #{itemDetail.fkidUtil.prenomUtil}</h3>
+                                    <p>nombre d'heure(s) : #{itemDetail.nbrHeures}</p>
+                                    <p>Résumé : </p>
+                                    <p>#{itemDetail.resume}</p>
+                                        
+                                    <h:panelGroup rendered="#{itemDetail.fkidUtil.equals(utilisateursManageur.currentUser) and not phasesManageur.currentPhase.dateFinPhase.after(projetsManageur.dateOld)  }">
+                                        <a class="btn btn-sm btn-outline-primary" href="../details/modification-detail.xhtml?id=#{itemDetail.idDetailCOnsultPhase}" >Modifier</a>
+                                    </h:panelGroup>
                                 </div>
                             </li>
                         </ui:repeat>
                     </ul>
                     <c:if test="#{not phasesManageur.currentPhase.dateFinPhase.after(projetsManageur.dateOld)}">
-                       <div class="row">
-                        <div class="col-12">                            
-                            <a href="ajout-detail.xhtml" class="btn btn-outline-primary">Créer un nouveau ticket d'intervention</a>
-                        </div>
-                    </div> 
+                        <div class="row">
+                            <div class="col-12">                            
+                                <a href="../details/add-detail.xhtml" class="btn btn-outline-primary">Créer un nouveau ticket d'intervention</a>
+                            </div>
+                        </div> 
                     </c:if>
                     
                 </h:panelGroup> 

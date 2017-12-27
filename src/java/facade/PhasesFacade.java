@@ -46,6 +46,7 @@ public class PhasesFacade extends AbstractFacade<Phases> {
         Phases phase;
         try {
             Query query = em.createNamedQuery("Phases.findOnByIdAndProjet", Phases.class);
+            query.setHint("javax.persistence.cache.storeMode", "REFRESH");
             query.setParameter("idPhase", idPhase);
             query.setParameter("idProjet", currentProjet);
             phase = (Phases)query.getSingleResult();

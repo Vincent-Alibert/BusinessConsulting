@@ -6729,6 +6729,9 @@ ul.card-ul {
   border-radius: 5px;
   padding: 10px; }
 
+.navbar {
+  margin-bottom: 25px; }
+
 .return {
   margin-top: 20px; }
 

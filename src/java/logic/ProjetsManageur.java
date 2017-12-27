@@ -160,7 +160,6 @@ public class ProjetsManageur implements Serializable {
     public void loadOne(){
         try{
             idProjet = Integer.parseInt(idProjetRequest);
-            System.out.println("id = " + idProjet);
             currentProjet = projetsFacade.find(idProjet);
         } catch(NumberFormatException e) {
             currentProjet = new Projets();

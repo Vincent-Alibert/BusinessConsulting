@@ -161,24 +161,47 @@ public class PhasesManageur implements Serializable {
     /*  méthode */
     public String addPhase(Projets currentProjet){
         try{
-            currentSecteur = secteursFacade.findOneById(secteurChoise);
-            currentPhase = new Phases(Integer.MIN_VALUE, libelle, montant, dateDebut, dateFin, 0);
-            currentPhase.setFkidProjet(currentProjet);
-            listSecteurs = new ArrayList();
-            listSecteurs.add(currentSecteur);
-            currentPhase.setSecteursCollection(listSecteurs);
-            phasesFacade.create(currentPhase);
-            
-            setLibelle(null);
-            setDateDebut(null);
-            setDateFin(null);
-            setMontant(0);
-            setEtatAvancement(0);
-            FacesContext context = FacesContext.getCurrentInstance();
-            FacesMessage message = new FacesMessage();
-            message.setSeverity(FacesMessage.SEVERITY_INFO);
-            message.setSummary("La phase a bien été ajouté");
-            context.addMessage("ajoutPhase", message);
+            if(dateFin == null){
+                dateFin =new Date(0);
+                currentSecteur = secteursFacade.findOneById(secteurChoise);
+                currentPhase = new Phases(Integer.MIN_VALUE, libelle, montant, dateDebut, dateFin, 0);
+                currentPhase.setFkidProjet(currentProjet);
+                listSecteurs = new ArrayList();
+                listSecteurs.add(currentSecteur);
+                currentPhase.setSecteursCollection(listSecteurs);
+                phasesFacade.create(currentPhase);
+                
+                setLibelle(null);
+                setDateDebut(null);
+                setDateFin(null);
+                setMontant(0);
+                setEtatAvancement(0);
+                FacesContext context = FacesContext.getCurrentInstance();
+                FacesMessage message = new FacesMessage();
+                message.setSeverity(FacesMessage.SEVERITY_INFO);
+                message.setSummary("La phase a bien été ajouté");
+                context.addMessage("ajoutPhase", message);
+            }
+            if(dateFin != null && dateFin.after(dateDebut) ){
+                currentSecteur = secteursFacade.findOneById(secteurChoise);
+                currentPhase = new Phases(Integer.MIN_VALUE, libelle, montant, dateDebut, dateFin, 0);
+                currentPhase.setFkidProjet(currentProjet);
+                listSecteurs = new ArrayList();
+                listSecteurs.add(currentSecteur);
+                currentPhase.setSecteursCollection(listSecteurs);
+                phasesFacade.create(currentPhase);
+                
+                setLibelle(null);
+                setDateDebut(null);
+                setDateFin(null);
+                setMontant(0);
+                setEtatAvancement(0);
+                FacesContext context = FacesContext.getCurrentInstance();
+                FacesMessage message = new FacesMessage();
+                message.setSeverity(FacesMessage.SEVERITY_INFO);
+                message.setSummary("La phase a bien été ajouté");
+                context.addMessage("ajoutPhase", message);
+            }
             
         } catch (Exception e) {
             FacesContext context = FacesContext.getCurrentInstance();
@@ -189,7 +212,7 @@ public class PhasesManageur implements Serializable {
         }
         return "";
     }
-        
+    
     public void load(Projets currentProjet){
         try{
             setIdPhase(Integer.parseInt(IdPhaseRequest));
