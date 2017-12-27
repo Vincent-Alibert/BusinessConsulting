@@ -2,8 +2,8 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <f:metadata>
         <f:viewParam id="id" name="id" value="#{phasesManageur.idPhaseRequest}" required="false" />
         <f:viewAction onPostback="true" action="#{phasesManageur.load(projetsManageur.currentProjet)}" />
@@ -32,8 +32,8 @@
                             <p>Secteur :
                                 <ui:repeat value="#{phasesManageur.currentPhase.secteursCollection}" var="itemSecteur">
                                     #{itemSecteur.libelleSecteur}
-                            </ui:repeat>
-                                </p>
+                                </ui:repeat>
+                            </p>
                         </div>
                         <div id="projet-date" class="col-12">
                             <p id="projet-date-debut">Débuté le : 
@@ -62,20 +62,22 @@
                         <ui:repeat value="#{phasesManageur.currentPhase.detailConsultPhasesCollection}" var="itemDetail">
                             <li class="col-6 col-md-4">
                                 <div class="card">
-                                        <h3 class="card-title">Intervenant : #{itemDetail.fkidUtil.nomUtil} #{itemDetail.fkidUtil.prenomUtil}</h3>
-                                        <p>nombre d'heure(s) : #{itemDetail.nbrHeures}</p>
-                                        <p>Résumé : </p>
-                                        <p>#{itemDetail.resume}</p>
+                                    <h3 class="card-title">Intervenant : #{itemDetail.fkidUtil.nomUtil} #{itemDetail.fkidUtil.prenomUtil}</h3>
+                                    <p>nombre d'heure(s) : #{itemDetail.nbrHeures}</p>
+                                    <p>Résumé : </p>
+                                    <p>#{itemDetail.resume}</p>
+                                    
+                                    <h:panelGroup rendered="#{itemDetail.fkidUtil.equals(utilisateursManageur.currentUser) and not phasesManageur.currentPhase.dateFinPhase.after(projetsManageur.dateOld)  }">
+                                        <a class="btn btn-sm btn-outline-primary" href="../details/modification-detail.xhtml?id=#{itemDetail.idDetailCOnsultPhase}" >Modifier</a>
+                                    </h:panelGroup>
                                 </div>
                             </li>
                         </ui:repeat>
                     </ul> 
-                    <div class="col-12 message">
-                        <h:message for="supPhase" showSummary="true" showDetail="false"/>
-                    </div>
+                                   
                     <div class="row">
                         <div class="col-12">                            
-                            <a href="modifications-phase.xhtml" class="btn btn-outline-primary">Modifications</a>
+                            <a href="modifications-phase.xhtml" class="btn btn-outline-primary">Modifications</a> <c:if test="#{not phasesManageur.currentPhase.dateFinPhase.after(projetsManageur.dateOld)}"><a href="../details/add-detail.xhtml" class="btn btn-outline-primary">Créer un nouveau ticket d'intervention</a></c:if>
                         </div>
                     </div>
                 </h:panelGroup> 

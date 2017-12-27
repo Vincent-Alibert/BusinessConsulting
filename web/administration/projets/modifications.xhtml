@@ -2,66 +2,74 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-                xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"> 
     
     <ui:define name="content-main">
         <section id="projet-modification">
             <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <h1>#{projetsManageur.currentProjet.libelleProj} <em>(Modification)</em></h1>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <h:form id="modifProjet">
-                            <div class="form-group row">
-                                <label for="Libelle" class="col-2 col-form-label">Libelle</label>
-                                <div class="col-5">
-                                    <h:inputText label="Libelle" id="libelle" class="form-control" value="#{projetsManageur.libelle}" size="50" required="true" />
-                                    <h:message for="libelle" errorClass="message-error" />                                    
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="date-start" class="col-2 col-form-label">Date de début</label>
-                                <div class="col-5">
-                                    <h:inputText label="La date de début" id="date-start" class="form-control" value="#{projetsManageur.dateDebutProj}" size="20" required="true" >
-                                        <f:convertDateTime pattern="dd/MM/yyyy" />
-                                    </h:inputText>
-                                    <h:message for="date-start" errorClass="message-error" />                                    
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="date-end" class="col-2 col-form-label">Date de fin</label>
-                                <div class="col-5">
-                                    <h:inputText label="La date de fin" id="date-end" class="form-control" value="#{projetsManageur.dateFinProj}" size="20" required="false" >
-                                        <f:convertDateTime pattern="dd/MM/yyyy" />
-                                    </h:inputText>
-                                    <h:message for="date-end" errorClass="message-error" />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for='client' class="col-2 col-form-label">état du projet</label>
-                                <div class="col-3">
-                                    <h:selectOneMenu class="form-control" id="secteur" value="#{projetsManageur.etatProjet}" >
-                                        <f:selectItem itemValue = "0" itemLabel = "En cours" /> 
-                                        <f:selectItem itemValue = "1" itemLabel = "Reussi" /> 
-                                        <f:selectItem itemValue = "2" itemLabel = "Echec" />                                        
-                                    </h:selectOneMenu>
-                                </div>
-                            </div>
-                            <h:commandButton value="Valider" type="submit" id="button" class="btn btn-outline-primary" action="#{projetsManageur.modifProjet()}" />
-                        </h:form>
-                        <div class="message">
-                            <h:message for="modifProjet" showSummary="true" showDetail="false"/>
+                <c:if test="#{projetsManageur.currentProjet.fkidChefProj.equals(utilisateursManageur.currentUser)}">
+                    <div class="row">
+                        <div class="col-12">
+                            <h1>#{projetsManageur.currentProjet.libelleProj} <em>(Modification)</em></h1>
                         </div>
-                        
                     </div>
-                </div>
-                <div class="return row">
-                    <a class="btn btn-outline-primary" href="projets.xhtml?id=#{projetsManageur.currentProjet.idProjet}">Retourner sur le projet</a>
-                </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <h:form id="modifProjet">
+                                <div class="form-group row">
+                                    <label for="Libelle" class="col-2 col-form-label">Libelle</label>
+                                    <div class="col-5">
+                                        <h:inputText label="Libelle" id="libelle" class="form-control" value="#{projetsManageur.libelle}" size="50" required="true" />
+                                        <h:message for="libelle" errorClass="message-error" />                                    
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="date-start" class="col-2 col-form-label">Date de début</label>
+                                    <div class="col-5">
+                                        <h:inputText label="La date de début" id="date-start" class="form-control" value="#{projetsManageur.dateDebutProj}" size="20" required="true" >
+                                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                                        </h:inputText>
+                                        <h:message for="date-start" errorClass="message-error" />                                    
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="date-end" class="col-2 col-form-label">Date de fin</label>
+                                    <div class="col-5">
+                                        <h:inputText label="La date de fin" id="date-end" class="form-control" value="#{projetsManageur.dateFinProj}" size="20" required="false" >
+                                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                                        </h:inputText>
+                                        <h:message for="date-end" errorClass="message-error" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for='client' class="col-2 col-form-label">état du projet</label>
+                                    <div class="col-3">
+                                        <h:selectOneMenu class="form-control" id="secteur" value="#{projetsManageur.etatProjet}" >
+                                            <f:selectItem itemValue = "0" itemLabel = "En cours" /> 
+                                            <f:selectItem itemValue = "1" itemLabel = "Reussi" /> 
+                                            <f:selectItem itemValue = "2" itemLabel = "Echec" />                                        
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+                                <h:commandButton value="Valider" type="submit" id="button" class="btn btn-outline-primary" action="#{projetsManageur.modifProjet()}" />
+                            </h:form>
+                            <div class="message">
+                                <h:message for="modifProjet" showSummary="true" showDetail="false"/>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="return row">
+                        <a class="btn btn-outline-primary" href="projets.xhtml?id=#{projetsManageur.currentProjet.idProjet}">Retourner sur le projet</a>
+                    </div>
+                </c:if>
+                <c:if test="#{not projetsManageur.currentProjet.fkidChefProj.equals(utilisateursManageur.currentUser)}">
+                    <div class="row">
+                        <h2 class="col-12">Bonjour, il semblerait que vous n'ayez pas accés à cette page.</h2> 
+                        <a class="col-12" href="../../index.xhtml">Retour sur la page d'accueil</a>
+                    </div>
+                </c:if>
             </div> 
         </section>
     </ui:define>

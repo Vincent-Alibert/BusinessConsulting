@@ -1,0 +1,48 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"> 
+    <f:metadata>
+        <f:viewAction onPostback="true" action="#{detailManageur.reset()}" />
+    </f:metadata>
+    
+    <ui:define name="content-main">
+        <section id="phase-ajout">
+            <div class="container">
+                
+                <div class="row">
+                    <div class="col-12">
+                        <h1>Ajout d'un ticket à la phase #{phasesManageur.currentPhase.libellePhase}</h1>
+                    </div>
+                    <div class="col-12">
+                        <h:form id="ajoutDetail">
+                            <div class="form-group row">
+                                <label for='heures' class="col-3 col-form-label">Nombre d'heures effectuées</label>
+                                <div class="col-3">
+                                    <h:inputText id="heures" label="Le nombre " value="#{detailManageur.nbrHeure}" />
+                                    <h:message styleClass="message-error" for="heures" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="resume" class="col-3 col-form-label">Résumé de l'intervention : </label>
+                                <div class="col-5">
+                                    <h:inputTextarea rows="10" required="true" class="form-control" value="#{detailManageur.resume}" id="resume" />
+                                    <h:message styleClass="message-error" for="resume" />
+                                </div>
+                            </div>
+                            <h:commandButton value="Valider" type="submit" id="button" class="btn btn-outline-primary" action="#{detailManageur.addDetail(phasesManageur.currentPhase, utilisateursManageur.currentUser)}" />
+                        </h:form>
+                        <div class="message">
+                            <h:message for="ajoutDetail" showSummary="true" showDetail="false"/>
+                        </div>
+                        
+                        <a class="btn btn-outline-primary" href="../phases/phases.xhtml?id=#{phasesManageur.currentPhase.idPhase}">Retourner sur la phase</a>
+                    </div>
+                </div>
+            </div> 
+        </section>
+    </ui:define>
+</ui:composition>
