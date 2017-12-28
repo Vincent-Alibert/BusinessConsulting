@@ -229,6 +229,9 @@ public class PhasesManageur implements Serializable {
         } catch(NumberFormatException e) {
             currentPhase = new Phases();
         }
+        catch (Exception e) {
+            currentPhase = new Phases();
+        }
     }
     
     public String deletePhase(int idPhase){
