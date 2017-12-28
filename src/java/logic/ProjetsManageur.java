@@ -56,11 +56,11 @@ public class ProjetsManageur implements Serializable {
     public String getIdProjetRequest() {
         return idProjetRequest;
     }
-
+    
     public String getLibelle() {
         return libelle;
     }
-
+    
     public void setLibelle(String libelle) {
         this.libelle = libelle;
     }
@@ -154,10 +154,12 @@ public class ProjetsManageur implements Serializable {
             dateDebutProj = currentProjet.getDateDebutProj();
             // condition ternaire pour la dateFinProj;
             dateFinProj = ( dateFormat.format(dateOld).equals(dateFormat.format(currentProjet.getDateFinProj())) )? null : currentProjet.getDateFinProj();
-            
             etatProjet = currentProjet.getEtatFinal();
             libelle = currentProjet.getLibelleProj();
         } catch(NumberFormatException e) {
+            currentProjet = new Projets();
+        }
+        catch (Exception e) {
             currentProjet = new Projets();
         }
     }

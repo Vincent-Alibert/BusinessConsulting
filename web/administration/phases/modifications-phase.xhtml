@@ -12,7 +12,7 @@
                 <c:if test="#{not phasesManageur.currentPhase.fkidProjet.fkidChefProj.equals(utilisateursManageur.currentUser)}">
                     <div class="row">
                         <h2 class="col-12">Bonjour, vous n'avez pas accés ce dossier. Veuillez vous connecter ou retourner sur la page d'accueil</h2>
-                        <a class="col-12" href="../index.xhtml">Retour sur la page d'accueil</a>
+                        <a class="col-12" href="../../index.xhtml">Retour sur la page d'accueil</a>
                     </div>
                 </c:if>
                 <c:if test="#{phasesManageur.currentPhase.fkidProjet.fkidChefProj.equals(utilisateursManageur.currentUser)}">
