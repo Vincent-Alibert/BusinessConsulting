@@ -1,6 +1,7 @@
 <ui:composition template="/WEB-INF/template.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:ui="http://java.sun.com/jsf/facelets">
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
     <ui:define name="content-main">
         <!-- Main jumbotron for a primary marketing message or call to action -->
         <div class="jumbotron">
@@ -25,7 +26,7 @@
                     <h2>Chefs de projet</h2>
                     <p>Il reste :</p>
                     <ul>
-                        <li>Messages de suppression à afficher comme il faut</li>
+                        <li>Messages de suppression à afficher comme il faut(utiliser h:messages pour voir)</li>
                     </ul>
                 </div>
                 <div class="col-md-4">
@@ -44,8 +45,7 @@
                         <li>Créer le rôle admin</li>
                         <li>Créer class Error pour rediriger les pages d'erreur 403 voir 404 (header) même si c'est dans le web.xml</li>
                         <li>Chef: Créer la page archive et y mettre chaque projets finient chapoté et ne plus les mettre dans compte</li>
-                        <li>Consultant : Permettre la modification du détail si c'est nous qui l'avons crééns </li>
-                        <li>Consultant : Afficher la possibilité ou non de créer un détail si la phase est dans le même secteur d'activité</li>
+                        <li>Consultant : Afficher la possibilité ou non de créer un détail si la phase est dans le même secteur d'activité que nous</li>
                     </ul>
                 </div>
             </div>
