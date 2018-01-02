@@ -14,8 +14,10 @@
                 <h:panelGroup rendered="#{not detailManageur.currentDetail.fkidUtil.equals(utilisateursManageur.currentUser)or phasesManageur.currentPhase
                                           .dateFinPhase.after(projetsManageur.dateOld)}">
                     <div class="row">
-                        <p>Bonjour, il semblerait que ce ticket n'existe pas ou que vous n'ayez pas les droits nécessaires pour le modifier</p>
-                        <a href="../compte.xhtml">Retour à mon compte</a>
+                        <div class="col">
+                            <h2>Bonjour, il semblerait que cette phase n'existe pas ou que vous n'ayez pas les droits d'accès à cette phase.</h2>
+                            <a href="../compte.xhtml">Retour sur la page compte</a>
+                        </div>
                     </div>
                 </h:panelGroup>
                 <h:panelGroup rendered="#{detailManageur.currentDetail.fkidUtil.equals(utilisateursManageur.currentUser)and not phasesManageur.currentPhase
